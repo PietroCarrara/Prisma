@@ -35,6 +35,7 @@
   <ItemGroup>
     <Compile Include="Entity.cs" />
     <Compile Include="EntityGroup.cs" />
+    <Compile Include="Graphics.cs" />
     <Compile Include="GroupList.cs" />
     <Compile Include="IDrawable.cs" />
     <Compile Include="IUpdateable.cs" />

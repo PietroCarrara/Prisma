@@ -8,12 +8,12 @@ namespace Prisma
     {
         protected Scene scene;
 
-        protected GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
         public PrismaGame()
         {
-            graphics = new GraphicsDeviceManager(this);
+            Graphics.Setup(new GraphicsDeviceManager(this));
+
             Content.RootDirectory = "Content"; 
         }
 
@@ -25,7 +25,7 @@ namespace Prisma
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            spriteBatch = new SpriteBatch(Graphics.Device);
         }
 
         protected override void UnloadContent()
