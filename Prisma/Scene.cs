@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,8 @@ namespace Prisma
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
+            Graphics.Device.Clear(Color.CornflowerBlue);
+
             foreach (var group in Groups)
                 foreach (var ent in group)
                     ent.Draw(spriteBatch);
