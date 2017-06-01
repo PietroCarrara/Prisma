@@ -11,11 +11,20 @@ namespace Prisma
 
         SpriteBatch spriteBatch;
 
+        private static PrismaGame instance;
+
         public PrismaGame()
         {
+            instance = this;
+
             Graphics.Setup(new GraphicsDeviceManager(this));
 
             Content.RootDirectory = "Content"; 
+        }
+
+        public static void End()
+        {
+            instance.Exit();
         }
 
         protected override void Initialize()
