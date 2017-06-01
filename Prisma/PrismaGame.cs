@@ -7,7 +7,6 @@ namespace Prisma
     public class PrismaGame : Game
     {
         protected Scene CurrentScene;
-        private Scene previousScene;
 
         SpriteBatch spriteBatch;
 
@@ -63,10 +62,11 @@ namespace Prisma
             Input.Update();
 
             //Update Current Scene
-            if (CurrentScene != previousScene)
+            if (!CurrentScene.IsInitialized)
+            {
                 CurrentScene.Initialize();
-
-            previousScene = CurrentScene;
+                CurrentScene.IsInitialized = true;
+            }
 
             CurrentScene.Update();
 

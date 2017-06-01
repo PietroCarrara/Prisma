@@ -12,6 +12,8 @@ namespace Prisma
     {
         public GroupList Groups { get; private set; } = new GroupList();
 
+        internal bool IsInitialized = false;
+
         public virtual void Initialize()
         {
 
