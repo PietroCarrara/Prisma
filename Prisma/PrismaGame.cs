@@ -46,6 +46,7 @@ namespace Prisma
         protected override void Update(GameTime gameTime)
         {
             // Update Systems
+            Time.Update(gameTime);
             Input.Update();
 
             //Update Current Scene
