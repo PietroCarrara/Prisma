@@ -13,6 +13,19 @@ namespace Prisma
 
         private static PrismaGame instance;
 
+        public static Scene Scene
+        {
+            get
+            {
+                return instance.CurrentScene;
+            }
+
+            set
+            {
+                instance.CurrentScene = value;
+            }
+        }
+
         public PrismaGame()
         {
             instance = this;
