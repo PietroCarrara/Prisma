@@ -6,7 +6,8 @@ namespace Prisma
 {
     public class PrismaGame : Game
     {
-        protected Scene scene;
+        protected Scene CurrentScene;
+        private Scene previousScene;
 
         SpriteBatch spriteBatch;
 
@@ -35,7 +36,15 @@ namespace Prisma
 
         protected override void Update(GameTime gameTime)
         {
-            scene.Update();
+            // Update Systems
+
+            //Update Current Scene
+            if (CurrentScene != previousScene)
+                CurrentScene.Initialize();
+
+            previousScene = CurrentScene;
+
+            CurrentScene.Update();
 
             base.Update(gameTime);
         }
@@ -44,7 +53,7 @@ namespace Prisma
         {
             spriteBatch.Begin();
 
-            scene.Draw(spriteBatch);
+            CurrentScene.Draw(spriteBatch);
             
             base.Draw(gameTime);
 

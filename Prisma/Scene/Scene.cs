@@ -12,6 +12,11 @@ namespace Prisma
     {
         public GroupList Groups { get; private set; } = new GroupList();
 
+        public virtual void Initialize()
+        {
+
+        }
+
         public virtual void Update()
         {
             foreach (var group in Groups)
