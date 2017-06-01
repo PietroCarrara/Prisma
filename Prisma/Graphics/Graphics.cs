@@ -10,13 +10,8 @@ namespace Prisma
 {
     public static class Graphics
     {
-        public static GraphicsDeviceManager Manager { get; private set; }
+        public static GraphicsDeviceManager Manager { get; internal set; }
 
         public static GraphicsDevice Device => Manager.GraphicsDevice;
-
-        internal static void Setup(GraphicsDeviceManager manager)
-        {
-            Manager = manager;
-        }
     }
 }

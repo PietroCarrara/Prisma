@@ -17,7 +17,7 @@ namespace Prisma
         {
             instance = this;
 
-            Graphics.Setup(new GraphicsDeviceManager(this));
+            Graphics.Manager = new GraphicsDeviceManager(this);
 
             Content.RootDirectory = "Content"; 
         }
