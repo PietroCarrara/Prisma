@@ -30,5 +30,15 @@ namespace Prisma
         {
             return currentState.IsKeyUp(key);
         }
+
+        public static bool IsKeyPressed(Keys key)
+        {
+            return currentState.IsKeyDown(key) && previousState.IsKeyUp(key);
+        }
+
+        public static bool IsKeyReleased(Keys key)
+        {
+            return currentState.IsKeyUp(key) && previousState.IsKeyDown(key);
+        }
     }
 }
