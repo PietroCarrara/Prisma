@@ -10,17 +10,45 @@ namespace Prisma
 {
     public class Entity : IUpdateable, IDrawable
     {
-        public Vector2 Position, Size;
+        public Entity Parent { get; private set; }
 
-        public Entity()
+        public Vector2 Position
         {
-            Position = new Vector2();
+            get
+            {
+                if (Parent != null)
+                    return RelativePosition + Parent.Position;
+
+                return RelativePosition;
+            }
+            set
+            {
+                RelativePosition += value;
+            }
+        }
+
+        public Vector2 RelativePosition, Size;
+
+        public List<Entity> Children { get; private set; } = new List<Entity>();
+
+        public Entity AddChild(Entity child)
+        {
+            child.Parent = this;
+
+            Children.Add(child);
+
+            return child;
+        }
+
+        public Entity(Entity parent = null)
+        {
+            RelativePosition = new Vector2();
             Size = new Vector2();
         }
 
         public Entity(Vector2 pos, Vector2 size)
         {
-            Position = pos;
+            RelativePosition = pos;
             Size = size;
         }
 
@@ -30,12 +58,14 @@ namespace Prisma
 
         public virtual void Update()
         {
-
+            foreach (var child in Children)
+                child.Update();
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-
+            foreach (var child in Children)
+                child.Draw(spriteBatch);
         }
     }
 }
