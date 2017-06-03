@@ -21,6 +21,10 @@ namespace Prisma
 
         public virtual void Update()
         {
+            // If the game is paused, don't update
+            if (PrismaGame.IsPaused)
+                return;
+
             foreach (var group in Groups)
                 foreach (var ent in group)
                     ent.Update();

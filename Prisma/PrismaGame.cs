@@ -6,6 +6,8 @@ namespace Prisma
 {
     public class PrismaGame : Game
     {
+        public static bool IsPaused;
+
         protected Scene CurrentScene;
 
         SpriteBatch spriteBatch;
@@ -57,6 +59,8 @@ namespace Prisma
 
         protected override void Update(GameTime gameTime)
         {
+            base.Update(gameTime);
+            
             // Update Systems
             Time.Update(gameTime);
             Input.Update();
@@ -69,17 +73,15 @@ namespace Prisma
             }
 
             CurrentScene.Update();
-
-            base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
+            base.Draw(gameTime);
+
             spriteBatch.Begin();
 
             CurrentScene.Draw(spriteBatch);
-            
-            base.Draw(gameTime);
 
             spriteBatch.End();
         }
