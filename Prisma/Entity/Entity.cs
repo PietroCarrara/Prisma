@@ -16,7 +16,7 @@ namespace Prisma
 
         public Vector2 RelativePosition;
 
-        public Rectangle Size;
+        public float Width, Height;
 
         public List<Entity> Children { get; private set; } = new List<Entity>();
 
@@ -43,8 +43,35 @@ namespace Prisma
             }
             set
             {
-                RelativePosition = value;
+                if (Parent != null)
+                    RelativePosition = Parent.Position - value;
+                else
+                    RelativePosition = value;
             }
+        }
+
+        public float X
+        {
+            get => Position.X;
+            set => RelativePosition.X = value;
+        }
+
+        public float Y
+        {
+            get => Position.Y;
+            set => RelativePosition.Y = value;
+        }
+
+        public float Bottom
+        {
+            get => Position.Y + Height;
+            set => RelativePosition.Y = value - Height;
+        }
+
+        public float Right
+        {
+            get => Position.X + Width;
+            set => RelativePosition.X = value - Width;
         }
 
         public Entity AddChild(Entity child)
@@ -56,17 +83,18 @@ namespace Prisma
             return child;
         }
 
-        public Entity(Vector2 pos, Rectangle size)
+        public Entity(Vector2 pos, float width, float height)
         {
             RelativePosition = pos;
-            Size = size;
+            Width = width;
+            Height = height;
         }
 
-        public Entity() : this(Vector2.Zero, Rectangle.Empty)
+        public Entity() : this(Vector2.Zero, 0, 0)
         { }
 
-        public Entity(int x, int y, int width, int height) :
-        this(new Vector2(y, x), new Rectangle(0, 0, width, height))
+        public Entity(float x, float y, float width, float height) :
+        this(new Vector2(y, x), width, height)
         { }
 
         public virtual void Update()
