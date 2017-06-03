@@ -18,9 +18,11 @@ namespace Prisma
             Name = groupName;
         }
 
-        public void AddEntity(Entity e)
+        public Entity AddEntity(Entity e)
         {
             entities.Add(e);
+
+            return e;
         }
 
         public Entity this[int index]

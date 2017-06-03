@@ -14,15 +14,19 @@ namespace Prisma
 
         public float Rotation = 0;
 
+        public Vector2 RelativePosition, Size;
+
+        public List<Entity> Children { get; private set; } = new List<Entity>();
+
         public float RotationRadians
         {
             get
             {
-                return (float)(Rotation * Math.PI / 180); 
+                return Rotation * 0.01745329251f;
             }
             set
             {
-                Rotation = (float)(value * 180 / Math.PI);
+                Rotation = value * 57.2957795131f;
             }
         }
 
@@ -37,13 +41,9 @@ namespace Prisma
             }
             set
             {
-                RelativePosition += value;
+                RelativePosition = value;
             }
         }
-
-        public Vector2 RelativePosition, Size;
-
-        public List<Entity> Children { get; private set; } = new List<Entity>();
 
         public Entity AddChild(Entity child)
         {
