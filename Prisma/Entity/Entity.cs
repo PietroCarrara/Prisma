@@ -14,7 +14,9 @@ namespace Prisma
 
         public float Rotation = 0;
 
-        public Vector2 RelativePosition, Size;
+        public Vector2 RelativePosition;
+
+        public Rectangle Size;
 
         public List<Entity> Children { get; private set; } = new List<Entity>();
 
@@ -54,17 +56,17 @@ namespace Prisma
             return child;
         }
 
-        public Entity(Vector2 pos, Vector2 size)
+        public Entity(Vector2 pos, Rectangle size)
         {
             RelativePosition = pos;
             Size = size;
         }
 
-        public Entity() : this(Vector2.Zero, Vector2.Zero)
+        public Entity() : this(Vector2.Zero, Rectangle.Empty)
         { }
 
         public Entity(int x, int y, int width, int height) :
-        this(new Vector2(y, x), new Vector2(width, height))
+        this(new Vector2(y, x), new Rectangle(0, 0, width, height))
         { }
 
         public virtual void Update()
