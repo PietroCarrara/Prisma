@@ -8,6 +8,24 @@ namespace Prisma
     {
         public static bool IsPaused;
 
+        public static int ScreenHeight
+        {
+            get => Graphics.Manager.PreferredBackBufferHeight;
+            protected set => Graphics.Manager.PreferredBackBufferHeight = value;
+        }
+
+        public static int ScreenWidth
+        {
+            get => Graphics.Manager.PreferredBackBufferWidth;
+            protected set => Graphics.Manager.PreferredBackBufferWidth = value;
+        }
+
+        public bool IsFullScreen
+        {
+            get => Graphics.Manager.IsFullScreen;
+            set => Graphics.Manager.IsFullScreen = value;
+        }
+
         protected Scene CurrentScene;
 
         SpriteBatch spriteBatch;
@@ -29,11 +47,12 @@ namespace Prisma
 
         public PrismaGame()
         {
+            Graphics.Manager = new GraphicsDeviceManager(this);
+            Content.RootDirectory = "Content";
             instance = this;
 
-            Graphics.Manager = new GraphicsDeviceManager(this);
-
-            Content.RootDirectory = "Content"; 
+            ScreenWidth = 1280;
+            ScreenHeight = 720;
         }
 
         public static void End()
