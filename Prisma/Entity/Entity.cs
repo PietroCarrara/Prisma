@@ -12,6 +12,20 @@ namespace Prisma
     {
         public Entity Parent { get; private set; }
 
+        public float Rotation = 0;
+
+        public float RotationRadians
+        {
+            get
+            {
+                return (float)(Rotation * Math.PI / 180); 
+            }
+            set
+            {
+                Rotation = (float)(value * 180 / Math.PI);
+            }
+        }
+
         public Vector2 Position
         {
             get
@@ -40,17 +54,14 @@ namespace Prisma
             return child;
         }
 
-        public Entity(Entity parent = null)
-        {
-            RelativePosition = new Vector2();
-            Size = new Vector2();
-        }
-
         public Entity(Vector2 pos, Vector2 size)
         {
             RelativePosition = pos;
             Size = size;
         }
+
+        public Entity() : this(Vector2.Zero, Vector2.Zero)
+        { }
 
         public Entity(int x, int y, int width, int height) :
         this(new Vector2(y, x), new Vector2(width, height))
