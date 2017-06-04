@@ -10,6 +10,16 @@ namespace Prisma
 {
     public class Entity : IUpdateable, IDrawable
     {
+        public enum OriginEnum
+        {
+            TopLeft,
+            TopRight,
+            BottomLeft,
+            BottomRight,
+            Center,
+            None
+        }
+
         public Entity Parent { get; private set; }
 
         public float Rotation = 0;
@@ -17,6 +27,46 @@ namespace Prisma
         public Vector2 RelativePosition;
 
         public int Width, Height;
+
+        private OriginEnum originPoint = OriginEnum.TopLeft;
+        public OriginEnum OriginPoint
+        {
+            get => originPoint;
+            set
+            {
+                switch(value)
+                {
+                    case OriginEnum.TopLeft:
+                        Origin = new Vector2(0, 0);
+                        break;
+                    case OriginEnum.TopRight:
+                        Origin = new Vector2(Width, 0);
+                        break;
+                    case OriginEnum.BottomLeft:
+                        Origin = new Vector2(0, Height);
+                        break;
+                    case OriginEnum.BottomRight:
+                        Origin = new Vector2(Width, Height);
+                        break;
+                    case OriginEnum.Center:
+                        Origin = new Vector2(Width / 2, Height / 2);
+                        break;
+                }
+
+                originPoint = value;
+            }
+        }
+
+        private Vector2 origin = Vector2.Zero;
+        public Vector2 Origin
+        {
+            get => origin;
+            set
+            {
+                OriginPoint = OriginEnum.None;
+                origin = value;
+            }
+        }
 
         public List<Entity> Children { get; private set; } = new List<Entity>();
 
