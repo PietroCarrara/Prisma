@@ -16,7 +16,7 @@ namespace Prisma
 
         public Vector2 RelativePosition;
 
-        public float Width, Height;
+        public int Width, Height;
 
         public List<Entity> Children { get; private set; } = new List<Entity>();
 
@@ -83,7 +83,7 @@ namespace Prisma
             return child;
         }
 
-        public Entity(Vector2 pos, float width, float height)
+        public Entity(Vector2 pos, int width, int height)
         {
             RelativePosition = pos;
             Width = width;
@@ -93,7 +93,7 @@ namespace Prisma
         public Entity() : this(Vector2.Zero, 0, 0)
         { }
 
-        public Entity(float x, float y, float width, float height) :
+        public Entity(float x, float y, int width, int height) :
         this(new Vector2(y, x), width, height)
         { }
 
