@@ -26,7 +26,7 @@ namespace Prisma
             set => Graphics.Manager.IsFullScreen = value;
         }
 
-        protected Scene CurrentScene;
+        private Scene CurrentScene;
 
         SpriteBatch spriteBatch;
 
