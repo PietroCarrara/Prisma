@@ -14,9 +14,21 @@ namespace Prisma
 
         internal bool IsInitialized = false;
 
+        public Scene()
+        {
+            Groups.Scene = this;
+        }
+
         public virtual void Initialize()
         {
+            InitializeEntities();
+        }
 
+        internal void InitializeEntities()
+        {
+            foreach (var group in Groups)
+                foreach (var entity in group)
+                    entity.Initialize();
         }
 
         public virtual void Update()

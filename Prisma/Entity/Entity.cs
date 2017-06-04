@@ -22,6 +22,10 @@ namespace Prisma
 
         public Entity Parent { get; private set; }
 
+        public Scene Scene { get; internal set; }
+
+        public EntityGroup Group { get; internal set; }
+
         public float Rotation = 0;
 
         public Vector2 RelativePosition;
@@ -146,6 +150,16 @@ namespace Prisma
         public Entity(float x, float y, int width, int height) :
         this(new Vector2(y, x), width, height)
         { }
+
+        /// <summary>
+        /// In this method the entity already has access to
+        /// it's parent. Base should be called AFTER your logic.
+        /// </summary>
+        public virtual void Initialize()
+        {
+            foreach (var child in Children)
+                child.Initialize();
+        }
 
         public virtual void Update()
         {

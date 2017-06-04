@@ -11,6 +11,8 @@ namespace Prisma
     {
         private List<EntityGroup> list;
 
+        internal Scene Scene;
+
         public GroupList()
         {
             list = new List<EntityGroup>();
@@ -19,6 +21,8 @@ namespace Prisma
         public EntityGroup Add(EntityGroup group)
         {
             list.Add(group);
+
+            group.Scene = Scene;
 
             return group;
         }
