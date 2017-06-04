@@ -134,6 +134,7 @@ namespace Prisma
 
             Children.Add(child);
 
+            child.Initialize();
             return child;
         }
 
@@ -153,12 +154,10 @@ namespace Prisma
 
         /// <summary>
         /// In this method the entity already has access to
-        /// it's parent. Base should be called AFTER your logic.
+        /// it's parent.
         /// </summary>
         public virtual void Initialize()
         {
-            foreach (var child in Children)
-                child.Initialize();
         }
 
         public virtual void Update()

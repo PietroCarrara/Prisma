@@ -25,7 +25,9 @@ namespace Prisma
             entities.Add(e);
 
             e.Group = this;
+            e.Scene = Scene;
 
+            e.Initialize();
             return e;
         }
 

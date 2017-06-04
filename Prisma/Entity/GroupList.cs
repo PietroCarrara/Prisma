@@ -45,7 +45,7 @@ namespace Prisma
                     if (group.Name == name)
                         return group;
 
-                throw new IndexOutOfRangeException("Group name \"" + name + "\" not found");
+                throw new IndexOutOfRangeException("Group \"" + name + "\" not found");
             }
         }
     }
