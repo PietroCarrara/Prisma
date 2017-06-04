@@ -104,28 +104,28 @@ namespace Prisma
             }
         }
 
-        public float X
+        public float Left
         {
-            get => Position.X;
-            set => RelativePosition.X = value;
-        }
-
-        public float Y
-        {
-            get => Position.Y;
-            set => RelativePosition.Y = value;
-        }
-
-        public float Bottom
-        {
-            get => Position.Y + Height;
-            set => RelativePosition.Y = value - Height;
+            get => Position.X - Origin.X;
+            set => Position = new Vector2(value + Origin.X, Position.Y);
         }
 
         public float Right
         {
-            get => Position.X + Width;
-            set => RelativePosition.X = value - Width;
+            get => Position.X + Width - Origin.X;
+            set => Position = new Vector2(value - Width + Origin.X, Position.Y);
+        }
+
+        public float Top
+        {
+            get => Position.Y - Origin.Y;
+            set => Position = new Vector2(Position.X, value + Origin.Y);
+        }
+
+        public float Bottom
+        {
+            get => Position.Y + Height - Origin.Y;
+            set => Position = new Vector2(Position.X, value - Height + Origin.Y);
         }
 
         public Entity AddChild(Entity child)
