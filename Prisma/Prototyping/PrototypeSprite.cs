@@ -41,5 +41,10 @@ namespace Prisma.Prototyping
                 rotation: Parent.RotationRadians,
                 origin: Parent.Origin);
         }
+
+        public override void OnDestroy()
+        {
+            rect.Dispose();
+        }
     }
 }

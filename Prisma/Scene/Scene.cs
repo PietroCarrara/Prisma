@@ -32,6 +32,13 @@ namespace Prisma
             foreach (var group in Groups)
                 foreach (var ent in group)
                     ent.Update();
+
+            foreach(var group in Groups)
+                while(group.DestroyQueue.Any())
+                {
+                    group.RemoveEntity(group.DestroyQueue[0]);
+                    group.DestroyQueue.RemoveAt(0);
+                }
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)

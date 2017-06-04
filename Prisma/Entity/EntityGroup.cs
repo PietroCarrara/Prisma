@@ -13,6 +13,8 @@ namespace Prisma
 
         internal Scene Scene;
 
+        internal List<Entity> DestroyQueue = new List<Entity>();
+
         private List<Entity> entities = new List<Entity>();
 
         public EntityGroup(string groupName)
@@ -24,11 +26,16 @@ namespace Prisma
         {
             entities.Add(e);
 
-            e.Group = this;
             e.Scene = Scene;
+            e.Group = this;
 
             e.Initialize();
             return e;
+        }
+
+        internal void RemoveEntity(Entity e)
+        {
+            entities.Remove(e);
         }
 
         public Entity this[int index]

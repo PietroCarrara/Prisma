@@ -38,7 +38,7 @@ namespace Prisma
             get => originPoint;
             set
             {
-                switch(value)
+                switch (value)
                 {
                     case OriginEnum.TopLeft:
                         Origin = new Vector2(0, 0);
@@ -131,11 +131,20 @@ namespace Prisma
         public Entity AddChild(Entity child)
         {
             child.Parent = this;
+            child.Group = Group;
 
             Children.Add(child);
 
             child.Initialize();
             return child;
+        }
+
+        public Entity RemoveChild(Entity child)
+        {
+            if (Children.Remove(child))
+                return child;
+
+            return null;
         }
 
         public Entity(Vector2 pos, int width, int height)
@@ -171,5 +180,21 @@ namespace Prisma
             foreach (var child in Children)
                 child.Draw(spriteBatch);
         }
+
+        public void Destroy()
+        {
+            while (Children.Any())
+                Children[0].Destroy();
+
+            OnDestroy();
+
+            if (Group != null)
+                Group.DestroyQueue.Add(this);
+            else
+                Parent.RemoveChild(this);
+        }
+
+        public virtual void OnDestroy()
+        { }
     }
 }
