@@ -20,10 +20,23 @@ namespace Prisma
             protected set => Graphics.Manager.PreferredBackBufferWidth = value;
         }
 
-        public bool IsFullScreen
+        public static bool IsFullScreen
         {
             get => Graphics.Manager.IsFullScreen;
-            set => Graphics.Manager.IsFullScreen = value;
+            protected set => Graphics.Manager.IsFullScreen = value;
+        }
+
+        public static bool MouseVisible
+        {
+            get
+            {
+                return instance.IsMouseVisible;
+            }
+
+            set
+            {
+                instance.IsMouseVisible = value;
+            }
         }
 
         private Scene CurrentScene;
@@ -82,7 +95,8 @@ namespace Prisma
             
             // Update Systems
             Time.Update(gameTime);
-            Input.Update();
+            Keyboard.Update();
+            Mouse.Update();
 
             //Update Current Scene
             if (!CurrentScene.IsInitialized)

@@ -12,7 +12,9 @@ namespace Prisma
         // Start currentState at a value, so 
         // previous state is not null in the
         // first frame
-        private static KeyboardState currentState = Microsoft.Xna.Framework.Input.Keyboard.GetState(), previousState;
+        private static KeyboardState
+            currentState = Microsoft.Xna.Framework.Input.Keyboard.GetState(),
+            previousState;
 
         internal static void Update()
         {
