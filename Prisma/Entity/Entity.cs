@@ -26,7 +26,25 @@ namespace Prisma
 
         public EntityGroup Group { get; internal set; }
 
-        public float Rotation = 0;
+        private float rotation = 0;
+        public float Rotation
+        {
+            get
+            {
+                if (Parent != null)
+                    return Parent.Rotation + rotation;
+                else
+                    return rotation;
+            }
+
+            set
+            {
+                if (Parent != null)
+                    Rotation = value - Parent.Rotation;
+                else
+                    rotation = value;
+            }
+        }
 
         public Vector2 RelativePosition;
 

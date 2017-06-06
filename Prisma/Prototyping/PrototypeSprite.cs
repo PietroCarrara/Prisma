@@ -37,8 +37,8 @@ namespace Prisma.Prototyping
 
             spriteBatch.Draw(
                 texture: rect,
-                position: Parent.Position,
-                rotation: Parent.RotationRadians,
+                position: Position,
+                rotation: RotationRadians,
                 origin: Parent.Origin);
         }
 
