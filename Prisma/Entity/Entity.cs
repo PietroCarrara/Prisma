@@ -78,11 +78,11 @@ namespace Prisma
         {
             get
             {
-                return Rotation * 0.01745329251f;
+                return Rotation.ToRadians();
             }
             set
             {
-                Rotation = value * 57.2957795131f;
+                Rotation = value.ToDegrees();
             }
         }
 

@@ -40,6 +40,8 @@
     <Compile Include="Input\Mouse.cs" />
     <Compile Include="Interfaces\IDrawable.cs" />
     <Compile Include="Interfaces\IUpdateable.cs" />
+    <Compile Include="Math\FloatExtensions.cs" />
+    <Compile Include="Math\Math.cs" />
     <Compile Include="PrismaGame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scene\Scene.cs" />
