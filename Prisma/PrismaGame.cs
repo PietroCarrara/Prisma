@@ -11,19 +11,19 @@ namespace Prisma
         public static int ScreenHeight
         {
             get => Graphics.Manager.PreferredBackBufferHeight;
-            protected set => Graphics.Manager.PreferredBackBufferHeight = value;
+            set => Graphics.Manager.PreferredBackBufferHeight = value;
         }
 
         public static int ScreenWidth
         {
             get => Graphics.Manager.PreferredBackBufferWidth;
-            protected set => Graphics.Manager.PreferredBackBufferWidth = value;
+            set => Graphics.Manager.PreferredBackBufferWidth = value;
         }
 
         public static bool IsFullScreen
         {
             get => Graphics.Manager.IsFullScreen;
-            protected set => Graphics.Manager.IsFullScreen = value;
+            set => Graphics.Manager.IsFullScreen = value;
         }
 
         public static bool MouseVisible
@@ -106,6 +106,8 @@ namespace Prisma
             }
 
             CurrentScene.Update();
+
+            Graphics.Manager.ApplyChanges();
         }
 
         protected override void Draw(GameTime gameTime)
