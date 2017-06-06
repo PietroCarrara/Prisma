@@ -17,5 +17,10 @@ namespace Prisma
         {
             return (float)Math.Cos(radians);
         }
+
+        public static float Atan2(float y, float x)
+        {
+            return (float) Math.Atan2(y, x);
+        }
     }
 }
