@@ -20,6 +20,8 @@ namespace Prisma
             None
         }
 
+        internal bool IsInitialized = false;
+
         public Entity Parent { get; private set; }
 
         public Scene Scene { get; internal set; }
@@ -153,7 +155,12 @@ namespace Prisma
 
             Children.Add(child);
 
-            child.Initialize();
+            if(!child.IsInitialized)
+            {
+                child.Initialize();
+                child.IsInitialized = true;
+            }
+
             return child;
         }
 
@@ -163,6 +170,19 @@ namespace Prisma
                 return child;
 
             return null;
+        }
+
+        public EntityGroup DetatchFromParent()
+        {
+            RelativePosition = Position;
+            rotation = Rotation;
+
+            Parent.RemoveChild(this);
+            Parent = null;
+
+            Group.AddEntity(this);
+
+            return Group;
         }
 
         public Entity(Vector2 pos, int width, int height)

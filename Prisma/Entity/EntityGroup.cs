@@ -29,7 +29,12 @@ namespace Prisma
             e.Scene = Scene;
             e.Group = this;
 
-            e.Initialize();
+            if (!e.IsInitialized)
+            {
+                e.Initialize();
+                e.IsInitialized = true;
+            }
+
             return e;
         }
 
