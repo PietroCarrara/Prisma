@@ -155,7 +155,7 @@ namespace Prisma
 
             Children.Add(child);
 
-            if(!child.IsInitialized)
+            if (!child.IsInitialized)
             {
                 child.Initialize();
                 child.IsInitialized = true;
@@ -226,9 +226,9 @@ namespace Prisma
 
             OnDestroy();
 
-            if (Group != null)
-                Group.DestroyQueue.Add(this);
-            else
+            Group.DestroyQueue.Add(this);
+
+            if (Parent != null)
                 Parent.RemoveChild(this);
         }
 
