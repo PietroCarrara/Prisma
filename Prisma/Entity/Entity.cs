@@ -61,19 +61,19 @@ namespace Prisma
                 switch (value)
                 {
                     case OriginEnum.TopLeft:
-                        Origin = new Vector2(0, 0);
+                        origin = new Vector2(0, 0);
                         break;
                     case OriginEnum.TopRight:
-                        Origin = new Vector2(Width, 0);
+                        origin = new Vector2(Width, 0);
                         break;
                     case OriginEnum.BottomLeft:
-                        Origin = new Vector2(0, Height);
+                        origin = new Vector2(0, Height);
                         break;
                     case OriginEnum.BottomRight:
-                        Origin = new Vector2(Width, Height);
+                        origin = new Vector2(Width, Height);
                         break;
                     case OriginEnum.Center:
-                        Origin = new Vector2(Width / 2, Height / 2);
+                        origin = new Vector2(Width / 2, Height / 2);
                         break;
                 }
 
