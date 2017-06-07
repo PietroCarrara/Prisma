@@ -12,6 +12,8 @@ namespace Prisma
     {
         public GroupList Groups { get; private set; } = new GroupList();
 
+        public Color ClearColor = Color.CornflowerBlue;
+
         internal bool IsInitialized = false;
 
         public Scene()
@@ -43,7 +45,7 @@ namespace Prisma
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            Graphics.Device.Clear(Color.CornflowerBlue);
+            Graphics.Device.Clear(ClearColor);
 
             foreach (var group in Groups)
                 foreach (var ent in group)
