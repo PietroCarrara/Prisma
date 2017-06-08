@@ -9,6 +9,6 @@ namespace Prisma
 {
     public interface IDrawable
     {
-        void Draw(SpriteBatch spriteBatch);
+        void Draw(Camera camera);
     }
 }

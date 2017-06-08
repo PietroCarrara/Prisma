@@ -213,10 +213,10 @@ namespace Prisma
                 child.Update();
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(Camera camera)
         {
             foreach (var child in Children)
-                child.Draw(spriteBatch);
+                child.Draw(camera);
         }
 
         public void Destroy()

@@ -41,7 +41,11 @@ namespace Prisma
 
         private Scene CurrentScene;
 
-        SpriteBatch spriteBatch;
+        internal SpriteBatch spriteBatch { get; private set; }
+        public static SpriteBatch SpriteBatch
+        {
+            get => instance.spriteBatch;
+        }
 
         private static PrismaGame instance;
 
@@ -116,7 +120,7 @@ namespace Prisma
 
             spriteBatch.Begin();
 
-            CurrentScene.Draw(spriteBatch);
+            CurrentScene.Draw();
 
             spriteBatch.End();
         }

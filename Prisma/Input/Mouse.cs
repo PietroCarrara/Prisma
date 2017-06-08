@@ -94,7 +94,9 @@ namespace Prisma
         {
             get
             {
-                return currentState.Position.ToVector2();
+                var pos = currentState.Position.ToVector2();
+
+                return pos + PrismaGame.Scene.Camera.Position;
             }
         }
 

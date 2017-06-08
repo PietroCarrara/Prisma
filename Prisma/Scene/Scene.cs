@@ -8,9 +8,11 @@ using System.Threading.Tasks;
 
 namespace Prisma
 {
-    public class Scene : IUpdateable, IDrawable
+    public class Scene : IUpdateable
     {
         public GroupList Groups { get; private set; } = new GroupList();
+
+        public Camera Camera = new Camera();
 
         public Color ClearColor = Color.CornflowerBlue;
 
@@ -35,6 +37,8 @@ namespace Prisma
                 foreach (var ent in group)
                     ent.Update();
 
+            Camera.Update();
+
             foreach(var group in Groups)
                 while(group.DestroyQueue.Any())
                 {
@@ -43,13 +47,13 @@ namespace Prisma
                 }
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw()
         {
             Graphics.Device.Clear(ClearColor);
 
             foreach (var group in Groups)
                 foreach (var ent in group)
-                    ent.Draw(spriteBatch);
+                    ent.Draw(Camera);
         }
     }
 }

@@ -31,11 +31,11 @@ namespace Prisma.Prototyping
             base.Initialize();
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public override void Draw(Camera camera)
         {
-            base.Draw(spriteBatch);
+            base.Draw(camera);
 
-            spriteBatch.Draw(
+            camera.Draw(
                 texture: rect,
                 position: Position,
                 rotation: RotationRadians,
