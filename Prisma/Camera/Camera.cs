@@ -44,13 +44,14 @@ namespace Prisma
             }
         }
 
-        public virtual void Draw(Texture2D texture,
-            Vector2? position = null,
-            Rectangle? destinationRectangle = null,
-            Rectangle? sourceRectangle = null,
-            Vector2? origin = null,
-            Vector2? scale = null,
-            Color? color = null,
+        public virtual void Draw(
+            Texture2D texture,
+            Vector2? position = default(Vector2?),
+            Rectangle? destinationRectangle = default(Rectangle?),
+            Rectangle? sourceRectangle = default(Rectangle?),
+            Vector2? origin = default(Vector2?),
+            Vector2? scale = default(Vector2?),
+            Color? color = default(Color?),
             float rotation = 0,
             SpriteEffects effects = SpriteEffects.None,
             float layerDepth = 0)

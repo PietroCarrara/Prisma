@@ -12,6 +12,8 @@ namespace Prisma
     {
         private Entity e;
 
+        public float MinHeight, MinWidth, MaxHeight, MaxWidth;
+
         public FollowCamera(Entity e)
         {
             this.e = e;
@@ -23,6 +25,16 @@ namespace Prisma
 
             Position.X -= PrismaGame.ScreenWidth / 2;
             Position.Y -= PrismaGame.ScreenHeight / 2;
+
+            if (Position.X < MinWidth)
+                Position.X = MinWidth;
+            else if (Position.X > MaxWidth)
+                Position.X = MaxWidth;
+
+            if (Position.Y < MinHeight)
+                Position.Y = MinHeight;
+            else if (Position.Y > MaxHeight)
+                Position.Y = MaxHeight;
         }
 
         public override void Draw(Texture2D texture, Vector2? position = default(Vector2?), Rectangle? destinationRectangle = default(Rectangle?), Rectangle? sourceRectangle = default(Rectangle?), Vector2? origin = default(Vector2?), Vector2? scale = default(Vector2?), Color? color = default(Color?), float rotation = 0, SpriteEffects effects = SpriteEffects.None, float layerDepth = 0)
