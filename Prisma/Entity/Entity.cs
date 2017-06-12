@@ -93,6 +93,7 @@ namespace Prisma
         }
 
         public List<Entity> Children { get; private set; } = new List<Entity>();
+        private List<Entity> RemoveQueue = new List<Entity>();
 
         public float RotationRadians
         {
@@ -166,10 +167,9 @@ namespace Prisma
 
         public Entity RemoveChild(Entity child)
         {
-            if (Children.Remove(child))
-                return child;
+            RemoveQueue.Add(child);
 
-            return null;
+            return child;
         }
 
         public EntityGroup DetatchFromParent()
@@ -211,6 +211,8 @@ namespace Prisma
         {
             foreach (var child in Children)
                 child.Update();
+
+            flushDestroyQueue();
         }
 
         public virtual void Draw(Camera camera)
@@ -221,15 +223,24 @@ namespace Prisma
 
         public void Destroy()
         {
-            while (Children.Any())
-                Children[0].Destroy();
-
+            foreach (var child in Children)
+                child.Destroy();
+            
             OnDestroy();
-
-            Group.DestroyQueue.Add(this);
 
             if (Parent != null)
                 Parent.RemoveChild(this);
+            else
+                Group.DestroyQueue.Add(this);
+        }
+
+        private void flushDestroyQueue()
+        {
+            while (RemoveQueue.Any())
+            {
+                Children.Remove(RemoveQueue[0]);
+                RemoveQueue.RemoveAt(0);
+            }
         }
 
         public virtual void OnDestroy()
