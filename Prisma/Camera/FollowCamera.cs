@@ -12,6 +12,8 @@ namespace Prisma
     {
         private Entity e;
 
+        public bool UseBounds;
+
         public float MinHeight, MinWidth, MaxHeight, MaxWidth;
 
         public FollowCamera(Entity e)
@@ -25,6 +27,9 @@ namespace Prisma
 
             Position.X -= PrismaGame.ScreenWidth / 2;
             Position.Y -= PrismaGame.ScreenHeight / 2;
+
+            if (!UseBounds)
+                return;
 
             if (Position.X < MinWidth)
                 Position.X = MinWidth;

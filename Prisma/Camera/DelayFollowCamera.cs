@@ -14,6 +14,8 @@ namespace Prisma
 
         private float speed;
 
+        public bool UseBounds;
+
         public float MinHeight, MinWidth, MaxHeight, MaxWidth;
 
         public DelayFollowCamera(Entity e, float speed)
@@ -26,21 +28,25 @@ namespace Prisma
 
             Position.X -= PrismaGame.ScreenWidth / 2;
             Position.Y -= PrismaGame.ScreenHeight / 2;
-        
-            MaxWidth = PrismaGame.ScreenWidth;
-            MaxHeight = PrismaGame.ScreenHeight;
         }
 
         public override void Update()
         {
+            // Centralizes the camera
             var pos = Position;
             pos.X += PrismaGame.ScreenWidth / 2;
             pos.Y += PrismaGame.ScreenHeight / 2;
 
+            // Distance to our target
             var dist = (e.Position - pos) / 100;
 
+            // The closer we are, the slower we move
             Position.X += speed * Time.DeltaTime * dist.X;
             Position.Y += speed * Time.DeltaTime * dist.Y;
+
+            // Don't let the camera escape it's boundings
+            if (!UseBounds)
+                return;
 
             if (Position.X < MinWidth)
                 Position.X = MinWidth;

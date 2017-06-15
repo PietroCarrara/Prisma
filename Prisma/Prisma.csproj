@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Camera\Camera.cs" />
+    <Compile Include="Camera\DelayFollowCamera.cs" />
     <Compile Include="Camera\FollowCamera.cs" />
     <Compile Include="Entity\Entity.cs" />
     <Compile Include="Entity\EntityGroup.cs" />
