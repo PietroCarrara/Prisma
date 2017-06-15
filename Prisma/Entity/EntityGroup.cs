@@ -22,6 +22,14 @@ namespace Prisma
             Name = groupName;
         }
 
+        public int Count
+        {
+            get
+            {
+                return entities.Count;
+            }
+        }
+
         public Entity AddEntity(Entity e)
         {
             entities.Add(e);
