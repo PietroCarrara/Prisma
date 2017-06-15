@@ -10,7 +10,7 @@ namespace Prisma
 {
     public class DelayFollowCamera : Camera
     {
-        private Entity e;
+        public Entity Entity;
 
         private float speed;
 
@@ -20,7 +20,7 @@ namespace Prisma
 
         public DelayFollowCamera(Entity e, float speed)
         {
-            this.e = e;
+            this.Entity = e;
 
             this.speed = speed;
 
@@ -38,7 +38,7 @@ namespace Prisma
             pos.Y += PrismaGame.ScreenHeight / 2;
 
             // Distance to our target
-            var dist = (e.Position - pos) / 100;
+            var dist = (Entity.Position - pos) / 100;
 
             // The closer we are, the slower we move
             Position.X += speed * Time.DeltaTime * dist.X;

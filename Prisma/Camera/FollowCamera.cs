@@ -10,7 +10,7 @@ namespace Prisma
 {
     public class FollowCamera : Camera
     {
-        private Entity e;
+        public Entity Entity;
 
         public bool UseBounds;
 
@@ -18,12 +18,12 @@ namespace Prisma
 
         public FollowCamera(Entity e)
         {
-            this.e = e;
+            this.Entity = e;
         }
 
         public override void Update()
         {
-            Position = e.Position;
+            Position = Entity.Position;
 
             Position.X -= PrismaGame.ScreenWidth / 2;
             Position.Y -= PrismaGame.ScreenHeight / 2;

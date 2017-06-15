@@ -22,6 +22,10 @@ namespace Samples
     {
         private Scene parent;
 
+        private DelayFollowCamera camera;
+
+        private Entity player, green;
+
         public MainScene(Scene parent = null)
         {
             if (parent != null)
@@ -38,17 +42,17 @@ namespace Samples
 
             var gp = Groups.Add(new EntityGroup("squares"));
 
-            var player = gp.AddEntity(new PlayerEntity());
+            player = gp.AddEntity(new PlayerEntity());
 
-            var e = gp.AddEntity(new Entity());
-            e.Height = e.Width = 50;
-            e.Position = new Vector2(200);
-            e.AddChild(new PrototypeSprite(Color.Green));
+            green = gp.AddEntity(new Entity());
+            green.Height = green.Width = 50;
+            green.Position = new Vector2(200);
+            green.AddChild(new PrototypeSprite(Color.Green));
 
-            var cam = new DelayFollowCamera(player, 200);
-            cam.UseBounds = false;
+            camera = new DelayFollowCamera(player, 200);
+            camera.UseBounds = false;
 
-            Camera = cam;
+            Camera = camera;
 
             base.Initialize();
         }
@@ -67,6 +71,14 @@ namespace Samples
 
             if (Prisma.Keyboard.IsKeyPressed(Keys.P))
                 PrismaGame.IsPaused = !PrismaGame.IsPaused;
+
+            if(Prisma.Mouse.IsButtonPressed(MouseButton.Right))
+            {
+                if (camera.Entity == player)
+                    camera.Entity = green;
+                else
+                    camera.Entity = player;
+            }
         }
     }
 
@@ -145,12 +157,7 @@ namespace Samples
             RotationRadians = Position.AngleBetween(Prisma.Mouse.Position);
 
             if (Prisma.Mouse.IsButtonPressed(MouseButton.Left))
-            {
                 Scene.Groups["shoots"].AddEntity(new ShootEntity(Position, Rotation));
-            }
-
-            if (Prisma.Mouse.IsButtonDown(MouseButton.Right))
-                Destroy();
         }
     }
 }
