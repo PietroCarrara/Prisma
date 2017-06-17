@@ -51,6 +51,8 @@
     <Compile Include="Scene\Scene.cs" />
     <Compile Include="Input\Keyboard.cs" />
     <Compile Include="Prototyping\PrototypeSprite.cs" />
+    <Compile Include="Scene\Transitions\RightSlideTransition.cs" />
+    <Compile Include="Scene\Transitions\Transition.cs" />
     <Compile Include="Time\Time.cs" />
   </ItemGroup>
   <ItemGroup>

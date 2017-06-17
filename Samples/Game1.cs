@@ -7,14 +7,12 @@ namespace Samples
 {
     public class Game1 : PrismaGame
     {
-        public Game1() : base()
+        public Game1() : base(new MainScene())
         {
             ScreenWidth = 1280;
             ScreenHeight = 720;
 
             IsMouseVisible = true;
-
-            Scene = new MainScene();
         }
     }
 
@@ -72,13 +70,30 @@ namespace Samples
             if (Prisma.Keyboard.IsKeyPressed(Keys.P))
                 PrismaGame.IsPaused = !PrismaGame.IsPaused;
 
-            if(Prisma.Mouse.IsButtonPressed(MouseButton.Right))
+            if (Prisma.Mouse.IsButtonPressed(MouseButton.Right))
             {
                 if (camera.Entity == player)
                     camera.Entity = green;
                 else
                     camera.Entity = player;
             }
+
+            if (Prisma.Keyboard.IsKeyPressed(Keys.U))
+            {
+                var trans = new RightSlideTransition(this, this, .5f,
+                    () =>
+                    {
+                        green.Position = player.Position;
+                        ClearColor = Color.DodgerBlue;
+                    });
+
+                PrismaGame.Scene = trans;
+            }
+        }
+
+        public override void Draw()
+        {
+            base.Draw();
         }
     }
 
