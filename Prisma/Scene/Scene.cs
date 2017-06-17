@@ -16,7 +16,7 @@ namespace Prisma
 
         public Color ClearColor = Color.CornflowerBlue;
 
-        internal bool IsInitialized = false;
+        public bool IsInitialized { get; private set; } = false;
 
         public Scene()
         {
@@ -25,6 +25,7 @@ namespace Prisma
 
         public virtual void Initialize()
         {
+            IsInitialized = true;
         }
 
         public virtual void Update()

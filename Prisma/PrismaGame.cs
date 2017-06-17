@@ -104,10 +104,7 @@ namespace Prisma
 
             //Update Current Scene
             if (!CurrentScene.IsInitialized)
-            {
                 CurrentScene.Initialize();
-                CurrentScene.IsInitialized = true;
-            }
 
             CurrentScene.Update();
 
