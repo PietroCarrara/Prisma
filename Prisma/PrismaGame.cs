@@ -58,11 +58,14 @@ namespace Prisma
 
             set
             {
+                if (!value.IsInitialized)
+                    value.Initialize();
+
                 instance.CurrentScene = value;
             }
         }
 
-        public PrismaGame()
+        public PrismaGame(Scene scene) : base()
         {
             Graphics.Manager = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -70,6 +73,8 @@ namespace Prisma
 
             ScreenWidth = 1280;
             ScreenHeight = 720;
+
+            CurrentScene = scene;
         }
 
         public static void End()
@@ -80,6 +85,8 @@ namespace Prisma
         protected override void Initialize()
         {
             base.Initialize();
+
+            Scene = CurrentScene;
         }
 
         protected override void LoadContent()
@@ -101,10 +108,6 @@ namespace Prisma
             Time.Update(gameTime);
             Keyboard.Update();
             Mouse.Update();
-
-            //Update Current Scene
-            if (!CurrentScene.IsInitialized)
-                CurrentScene.Initialize();
 
             CurrentScene.Update();
 
