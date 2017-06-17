@@ -41,7 +41,7 @@ namespace Prisma
 
         private Scene CurrentScene;
 
-        internal SpriteBatch spriteBatch { get; private set; }
+        private SpriteBatch spriteBatch;
         public static SpriteBatch SpriteBatch
         {
             get => instance.spriteBatch;
