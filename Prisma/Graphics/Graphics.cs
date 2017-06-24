@@ -8,10 +8,16 @@ using System.Threading.Tasks;
 
 namespace Prisma
 {
-    public static class Graphics
-    {
-        public static GraphicsDeviceManager Manager { get; internal set; }
+	public static class Graphics
+	{
+		public static GraphicsDeviceManager Manager { get; internal set; }
 
-        public static GraphicsDevice Device => Manager.GraphicsDevice;
-    }
+		public static GraphicsDevice Device
+		{
+			get
+			{
+				return Manager.GraphicsDevice;
+			}
+		}
+	}
 }

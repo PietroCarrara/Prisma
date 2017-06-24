@@ -4,125 +4,150 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Prisma
 {
-    public class PrismaGame : Game
-    {
-        public static bool IsPaused;
+	public class PrismaGame : Game
+	{
+		public static bool IsPaused;
 
-        public static int ScreenHeight
-        {
-            get => Graphics.Manager.PreferredBackBufferHeight;
-            set => Graphics.Manager.PreferredBackBufferHeight = value;
-        }
-
-        public static int ScreenWidth 
+		public static int ScreenHeight
 		{
-            get => Graphics.Manager.PreferredBackBufferWidth;
-            set => Graphics.Manager.PreferredBackBufferWidth = value;
-        }
+			get
+			{
+				return Graphics.Manager.PreferredBackBufferHeight;
+			}
+			set
+			{
+				Graphics.Manager.PreferredBackBufferHeight = value;
+			}
+		}
 
-        public static bool IsFullScreen
-        {
-            get => Graphics.Manager.IsFullScreen;
-            set => Graphics.Manager.IsFullScreen = value;
-        }
 
-        public static bool MouseVisible
-        {
-            get
-            {
-                return instance.IsMouseVisible;
-            }
+		public static int ScreenWidth
+		{
+			get
+			{
+				return Graphics.Manager.PreferredBackBufferWidth;
+			}
+			set
+			{
+				Graphics.Manager.PreferredBackBufferWidth = value;
+			}
+		}
 
-            set
-            {
-                instance.IsMouseVisible = value;
-            }
-        }
 
-        private Scene CurrentScene;
+		public static bool IsFullScreen
+		{
+			get
+			{
+				return Graphics.Manager.IsFullScreen;
+			}
+			set
+			{
+				Graphics.Manager.IsFullScreen = value;
+			}
+		}
 
-        private SpriteBatch spriteBatch;
-        public static SpriteBatch SpriteBatch
-        {
-            get => instance.spriteBatch;
-        }
 
-        private static PrismaGame instance;
+		public static bool MouseVisible
+		{
+			get
+			{
+				return instance.IsMouseVisible;
+			}
 
-        public static Scene Scene
-        {
-            get
-            {
-                return instance.CurrentScene;
-            }
+			set
+			{
+				instance.IsMouseVisible = value;
+			}
+		}
 
-            set
-            {
-                if (!value.IsInitialized)
-                    value.Initialize();
+		private Scene CurrentScene;
 
-                instance.CurrentScene = value;
-            }
-        }
+		private SpriteBatch spriteBatch;
+		public static SpriteBatch SpriteBatch
+		{
+			get
+			{
+				return instance.spriteBatch;
+			}
+		}
 
-        public PrismaGame(Scene scene) : base()
-        {
-            Graphics.Manager = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
-            instance = this;
 
-            ScreenWidth = 1280;
-            ScreenHeight = 720;
+		private static PrismaGame instance;
 
-            CurrentScene = scene;
-        }
+		public static Scene Scene
+		{
+			get
+			{
+				return instance.CurrentScene;
+			}
 
-        public static void End()
-        {
-            instance.Exit();
-        }
+			set
+			{
+				if (!value.IsInitialized)
+					value.Initialize();
 
-        protected override void Initialize()
-        {
-            base.Initialize();
+				instance.CurrentScene = value;
+			}
+		}
 
-            Scene = CurrentScene;
-        }
+		public PrismaGame(Scene scene) : base()
+		{
+			Graphics.Manager = new GraphicsDeviceManager(this);
+			Content.RootDirectory = "Content";
+			instance = this;
 
-        protected override void LoadContent()
-        {
-            // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(Graphics.Device);
-        }
+			ScreenWidth = 1280;
+			ScreenHeight = 720;
 
-        protected override void UnloadContent()
-        {
-            // TODO: Unload any non ContentManager content here
-        }
+			CurrentScene = scene;
+		}
 
-        protected override void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
-            
-            // Update Systems
-            Time.Update(gameTime);
-            Keyboard.Update();
-            Mouse.Update();
+		public static void End()
+		{
+			instance.Exit();
+		}
 
-            CurrentScene.Update();
+		protected override void Initialize()
+		{
+			base.Initialize();
 
-            Graphics.Manager.ApplyChanges();
-        }
+			Scene = CurrentScene;
+		}
 
-        protected override void Draw(GameTime gameTime)
-        {
-            base.Draw(gameTime);
+		protected override void LoadContent()
+		{
+			// Create a new SpriteBatch, which can be used to draw textures.
+			spriteBatch = new SpriteBatch(Graphics.Device);
+		}
 
-            spriteBatch.Begin();
+		protected override void UnloadContent()
+		{
+			// TODO: Unload any non ContentManager content here
+		}
 
-            CurrentScene.Draw();
+		protected override void Update(GameTime gameTime)
+		{
+			base.Update(gameTime);
 
-            spriteBatch.End();
-        }
-    }
+			// Update Systems
+			Time.Update(gameTime);
+			Keyboard.Update();
+			Mouse.Update();
+
+			CurrentScene.Update();
+
+			Graphics.Manager.ApplyChanges();
+		}
+
+		protected override void Draw(GameTime gameTime)
+		{
+			base.Draw(gameTime);
+
+			spriteBatch.Begin();
+
+			CurrentScene.Draw();
+
+			spriteBatch.End();
+		}
+	}
 }

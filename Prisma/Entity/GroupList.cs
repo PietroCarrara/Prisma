@@ -7,46 +7,46 @@ using System.Threading.Tasks;
 
 namespace Prisma
 {
-    public class GroupList : IEnumerable<EntityGroup>
-    {
-        private List<EntityGroup> list;
+	public class GroupList : IEnumerable<EntityGroup>
+	{
+		private List<EntityGroup> list;
 
-        internal Scene Scene;
+		internal Scene Scene;
 
-        public GroupList()
-        {
-            list = new List<EntityGroup>();
-        }
+		public GroupList()
+		{
+			list = new List<EntityGroup>();
+		}
 
-        public EntityGroup Add(EntityGroup group)
-        {
-            list.Add(group);
+		public EntityGroup Add(EntityGroup group)
+		{
+			list.Add(group);
 
-            group.Scene = Scene;
+			group.Scene = Scene;
 
-            return group;
-        }
+			return group;
+		}
 
-        public IEnumerator<EntityGroup> GetEnumerator()
-        {
-            return list.GetEnumerator();
-        }
+		public IEnumerator<EntityGroup> GetEnumerator()
+		{
+			return list.GetEnumerator();
+		}
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return list.GetEnumerator();
-        }
+		IEnumerator IEnumerable.GetEnumerator()
+		{
+			return list.GetEnumerator();
+		}
 
-        public EntityGroup this[string name]
-        {
-            get
-            {
-                foreach (var group in list)
-                    if (group.Name == name)
-                        return group;
+		public EntityGroup this[string name]
+		{
+			get
+			{
+				foreach (var group in list)
+					if (group.Name == name)
+						return group;
 
-                throw new IndexOutOfRangeException("Group \"" + name + "\" not found");
-            }
-        }
-    }
+				throw new IndexOutOfRangeException("Group \"" + name + "\" not found");
+			}
+		}
+	}
 }
