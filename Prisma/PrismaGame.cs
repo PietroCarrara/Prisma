@@ -14,8 +14,8 @@ namespace Prisma
             set => Graphics.Manager.PreferredBackBufferHeight = value;
         }
 
-        public static int ScreenWidth
-        {
+        public static int ScreenWidth 
+		{
             get => Graphics.Manager.PreferredBackBufferWidth;
             set => Graphics.Manager.PreferredBackBufferWidth = value;
         }
