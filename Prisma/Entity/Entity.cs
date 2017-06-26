@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Text.RegularExpressions;
+using Microsoft.Xna.Framework.Media;
 
 namespace Prisma
 {
@@ -50,7 +50,39 @@ namespace Prisma
 
 		public Vector2 RelativePosition;
 
-		public int Width, Height;
+		public delegate void SizeChangedEventHandler(Entity e, Dimension d, int newSize);
+		public enum Dimension
+		{
+			Height,
+			Width
+		}
+		public event SizeChangedEventHandler SizeChanged;
+		private int width, height;
+		public int Width
+		{
+			get
+			{
+				return width;
+			}
+			set
+			{
+				width = value;
+				SizeChanged(this, Dimension.Width, value);
+			}
+		}
+
+		public int Height
+		{
+			get
+			{
+				return height;
+			}
+			set
+			{
+				height = value;
+				SizeChanged(this, Dimension.Height, value);
+			}
+		}
 
 		private OriginEnum originPoint = OriginEnum.TopLeft;
 		public OriginEnum OriginPoint
@@ -67,16 +99,19 @@ namespace Prisma
 						origin = new Vector2(0, 0);
 						break;
 					case OriginEnum.TopRight:
-						origin = new Vector2(Width, 0);
+						origin = new Vector2(width, 0);
 						break;
 					case OriginEnum.BottomLeft:
-						origin = new Vector2(0, Height);
+						origin = new Vector2(0, height);
 						break;
 					case OriginEnum.BottomRight:
-						origin = new Vector2(Width, Height);
+						origin = new Vector2(width, height);
 						break;
 					case OriginEnum.Center:
-						origin = new Vector2(Width / 2, Height / 2);
+						origin = new Vector2(width / 2, height / 2);
+						break;
+					default:
+						origin = Vector2.Zero;
 						break;
 				}
 
@@ -150,11 +185,11 @@ namespace Prisma
 		{
 			get
 			{
-				return Position.X + Width - Origin.X;
+				return Position.X + width - Origin.X;
 			}
 			set
 			{
-				Position = new Vector2(value - Width + Origin.X, Position.Y);
+				Position = new Vector2(value - width + Origin.X, Position.Y);
 			}
 		}
 
@@ -223,9 +258,15 @@ namespace Prisma
 
 		public Entity(Vector2 pos, int width, int height)
 		{
+			SizeChanged += (e, d, s) =>
+			{
+				// Recalculate the origin
+				OriginPoint = OriginPoint;
+			};
+
 			RelativePosition = pos;
-			Width = width;
-			Height = height;
+			this.width = width;
+			this.height = height;
 		}
 
 		public Entity() : this(Vector2.Zero, 0, 0)
