@@ -5,56 +5,66 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Content;
 
 namespace Prisma
 {
-    public class Scene : IUpdateable
-    {
-        public GroupList Groups { get; private set; } = new GroupList();
+	public class Scene : IUpdateable, IDisposable
+	{
+		public GroupList Groups { get; private set; } = new GroupList();
 
-        public Camera Camera = new Camera();
+		public Camera Camera = new Camera();
 
-        public Color ClearColor = Color.CornflowerBlue;
+		public Color ClearColor = Color.CornflowerBlue;
 
-        public bool IsInitialized { get; private set; } = false;
+		public bool IsInitialized { get; private set; } = false;
 
-        public Scene()
-        {
-            Groups.Scene = this;
-        }
+		public ContentManager Content;
 
-        public virtual void Initialize()
-        {
-            IsInitialized = true;
-        }
+		public Scene()
+		{
+			Groups.Scene = this;
+		}
 
-        public virtual void Update()
-        {
-            // If the game is paused, don't update
-            if (PrismaGame.IsPaused)
-                return;
+		public virtual void Initialize()
+		{
+			IsInitialized = true;
 
-            foreach (var group in Groups)
-                foreach (var ent in group)
-                    ent.Update();
+			Content = new ContentManager(PrismaGame.ContentManager.ServiceProvider, PrismaGame.ContentManager.RootDirectory);
+		}
 
-            Camera.Update();
+		public virtual void Update()
+		{
+			// If the game is paused, don't update
+			if (PrismaGame.IsPaused)
+				return;
 
-            foreach(var group in Groups)
-                while(group.DestroyQueue.Any())
-                {
-                    group.RemoveEntity(group.DestroyQueue[0]);
-                    group.DestroyQueue.RemoveAt(0);
-                }
-        }
+			foreach (var group in Groups)
+				foreach (var ent in group)
+					ent.Update();
 
-        public virtual void Draw()
-        {
-            Graphics.Device.Clear(ClearColor);
+			Camera.Update();
 
-            foreach (var group in Groups)
-                foreach (var ent in group)
-                    ent.Draw(Camera);
-        }
-    }
+			foreach (var group in Groups)
+				while (group.DestroyQueue.Any())
+				{
+					group.RemoveEntity(group.DestroyQueue[0]);
+					group.DestroyQueue.RemoveAt(0);
+				}
+		}
+
+		public virtual void Draw()
+		{
+			Graphics.Device.Clear(ClearColor);
+
+			foreach (var group in Groups)
+				foreach (var ent in group)
+					ent.Draw(Camera);
+		}
+
+		public void Dispose()
+		{
+			Content.Dispose();
+		}
+	}
 }

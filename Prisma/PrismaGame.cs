@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Content;
 
 namespace Prisma
 {
@@ -87,6 +88,18 @@ namespace Prisma
 					value.Initialize();
 
 				instance.CurrentScene = value;
+			}
+		}
+
+		internal static ContentManager ContentManager
+		{
+			get
+			{
+				return instance.Content;
+			}
+			set
+			{
+				instance.Content = value;
 			}
 		}
 
