@@ -5,46 +5,47 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
+using System.Management.Instrumentation;
 
 namespace Prisma.Prototyping
 {
-	public class PrototypeSprite : Entity
+	public class PrototypeSprite : Sprite
 	{
-		public Color Color;
+		private Color color;
+		public Color Color
+		{
+			get
+			{
+				return color;
+			}
+			set
+			{
+				Texture.SetData(makeData(value, Width, Height));
+				color = value;
+			}
+		}
 
-		private Texture2D rect;
+		private static Texture2D makeRect(Color c, int w, int h)
+		{
+			var rect = new Texture2D(Graphics.Device, w, h);
+			rect.SetData(makeData(c, w, h));
 
-		public PrototypeSprite(Color color)
+			return rect;
+		}
+
+		private static Color[] makeData(Color c, int w, int h)
+		{
+			var color = new Color[w * h];
+			for (int i = 0; i < w * h; i++)
+				color[i] = c;
+
+			return color;
+		}
+
+		public PrototypeSprite(Color color, int width, int height) :
+		base(makeRect(color, width, height), width, height)
 		{
 			Color = color;
-		}
-
-		public override void Initialize()
-		{
-			var colorData = new Color[Parent.Width * Parent.Height];
-			for (int i = 0; i < Parent.Width * Parent.Height; i++)
-				colorData[i] = Color;
-
-			rect = new Texture2D(Graphics.Device, Parent.Width, Parent.Height);
-			rect.SetData(colorData);
-
-			base.Initialize();
-		}
-
-		public override void Draw(Camera camera)
-		{
-			base.Draw(camera);
-
-			camera.Draw(
-				texture: rect,
-				position: Position,
-				rotation: RotationRadians,
-				origin: Parent.Origin);
-		}
-
-		public override void OnDestroy()
-		{
-			rect.Dispose();
 		}
 	}
 }

@@ -50,105 +50,8 @@ namespace Prisma
 
 		public Vector2 RelativePosition;
 
-		public delegate void SizeChangedEventHandler(Entity e, Dimension d, int newSize);
-		public enum Dimension
-		{
-			Height,
-			Width
-		}
-		public event SizeChangedEventHandler SizeChanged;
-		private int width, height;
-		public int Width
-		{
-			get
-			{
-				return width;
-			}
-			set
-			{
-				width = value;
-				SizeChanged(this, Dimension.Width, value);
-			}
-		}
-
-		public int Height
-		{
-			get
-			{
-				return height;
-			}
-			set
-			{
-				height = value;
-				SizeChanged(this, Dimension.Height, value);
-			}
-		}
-
-		private OriginEnum originPoint = OriginEnum.TopLeft;
-		public OriginEnum OriginPoint
-		{
-			get
-			{
-				return originPoint;
-			}
-			set
-			{
-				switch (value)
-				{
-					case OriginEnum.TopLeft:
-						origin = new Vector2(0, 0);
-						break;
-					case OriginEnum.TopRight:
-						origin = new Vector2(width, 0);
-						break;
-					case OriginEnum.BottomLeft:
-						origin = new Vector2(0, height);
-						break;
-					case OriginEnum.BottomRight:
-						origin = new Vector2(width, height);
-						break;
-					case OriginEnum.Center:
-						origin = new Vector2(width / 2, height / 2);
-						break;
-					default:
-						origin = Vector2.Zero;
-						break;
-				}
-
-				originPoint = value;
-			}
-		}
-
-		private Vector2 origin = Vector2.Zero;
-		public Vector2 Origin
-		{
-			get
-			{
-				return origin;
-			}
-			set
-
-			{
-				OriginPoint = OriginEnum.None;
-				origin = value;
-			}
-		}
-
-
 		public List<Entity> Children { get; private set; } = new List<Entity>();
 		private List<Entity> RemoveQueue = new List<Entity>();
-
-		public float RotationRadians
-		{
-			get
-			{
-				return Rotation.ToRadians();
-			}
-			set
-			{
-				Rotation = value.ToDegrees();
-			}
-		}
 
 		public Vector2 Position
 		{
@@ -168,57 +71,29 @@ namespace Prisma
 			}
 		}
 
-		public float Left
+		public float X
 		{
 			get
 			{
-				return Position.X - Origin.X;
+				return Position.X;
 			}
 			set
 			{
-				Position = new Vector2(value + Origin.X, Position.Y);
+				Position = new Vector2(value, this.Y);
 			}
 		}
 
-
-		public float Right
+		public float Y
 		{
 			get
 			{
-				return Position.X + width - Origin.X;
+				return Position.Y;
 			}
 			set
 			{
-				Position = new Vector2(value - width + Origin.X, Position.Y);
+				Position = new Vector2(this.X, value);
 			}
 		}
-
-
-		public float Top
-		{
-			get
-			{
-				return Position.Y - Origin.Y;
-			}
-			set
-			{
-				Position = new Vector2(Position.X, value + Origin.Y);
-			}
-		}
-
-
-		public float Bottom
-		{
-			get
-			{
-				return Position.Y + Height - Origin.Y;
-			}
-			set
-			{
-				Position = new Vector2(Position.X, value - Height + Origin.Y);
-			}
-		}
-
 
 		public Entity AddChild(Entity child)
 		{
@@ -236,44 +111,17 @@ namespace Prisma
 			return child;
 		}
 
-		public Entity RemoveChild(Entity child)
+		public Entity(Vector2 pos)
 		{
-			RemoveQueue.Add(child);
-
-			return child;
-		}
-
-		public EntityGroup DetatchFromParent()
-		{
-			RelativePosition = Position;
-			rotation = Rotation;
-
-			Parent.RemoveChild(this);
-			Parent = null;
-
-			Group.AddEntity(this);
-
-			return Group;
-		}
-
-		public Entity(Vector2 pos, int width, int height)
-		{
-			SizeChanged += (e, d, s) =>
-			{
-				// Recalculate the origin
-				OriginPoint = OriginPoint;
-			};
 
 			RelativePosition = pos;
-			this.width = width;
-			this.height = height;
 		}
 
-		public Entity() : this(Vector2.Zero, 0, 0)
+		public Entity() : this(Vector2.Zero)
 		{ }
 
-		public Entity(float x, float y, int width, int height) :
-		this(new Vector2(y, x), width, height)
+		public Entity(float x, float y) :
+		this(new Vector2(y, x))
 		{ }
 
 		/// <summary>
@@ -305,7 +153,7 @@ namespace Prisma
 			OnDestroy();
 
 			if (Parent != null)
-				Parent.RemoveChild(this);
+				Parent.RemoveQueue.Add(this);
 			else
 				Group.DestroyQueue.Add(this);
 		}

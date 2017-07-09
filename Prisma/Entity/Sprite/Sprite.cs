@@ -6,44 +6,46 @@ namespace Prisma
 {
 	public class Sprite : Entity
 	{
-		private Texture2D texture;
+		protected Texture2D Texture;
 
-		private Vector2 scale;
+		private Vector2 scale, middle;
 
-		public Sprite(Texture2D texture)
+		public int Width, Height;
+
+		public Sprite(Texture2D texture, int width, int height)
 		{
-			this.texture = texture;
+			this.Texture = texture;
+
+			Width = width;
+			Height = height;
+
+			middle = new Vector2(Width / 2f, Height / 2f);
 		}
 
 		public override void Initialize()
 		{
 			base.Initialize();
 
-			Width = Parent.Width;
-			Height = Parent.Height;
-
-			scale = new Vector2(((float)Width) / texture.Width, ((float)Height) / texture.Height);
-
-			OriginPoint = OriginEnum.Center;
+			scale = new Vector2(((float)Width) / Texture.Width, ((float)Height) / Texture.Height);
 		}
 
 		public override void Update()
 		{
 			base.Update();
 
-			scale.X = ((float)Width) / texture.Width;
-			scale.Y = ((float)Height) / texture.Height;
+			scale.X = ((float)Width) / Texture.Width;
+			scale.Y = ((float)Height) / Texture.Height;
 		}
 
 		public override void Draw(Camera camera)
 		{
 			base.Draw(camera);
 
-			camera.Draw(texture: texture,
+			camera.Draw(texture: Texture,
 						position: Position,
-						rotation: RotationRadians,
+						rotation: Rotation.ToRadians(),
 						scale: scale,
-						origin: Origin / scale);
+						origin: middle / scale);
 		}
 	}
 }

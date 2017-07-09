@@ -43,9 +43,8 @@ namespace Samples
 			player = gp.AddEntity(new PlayerEntity());
 
 			green = gp.AddEntity(new Entity());
-			green.Height = green.Width = 50;
 			green.Position = new Vector2(200);
-			green.AddChild(new PrototypeSprite(Color.Green));
+			green.AddChild(new PrototypeSprite(Color.Green, 100, 100));
 
 			camera = new DelayFollowCamera(player, 200);
 			camera.UseBounds = false;
@@ -99,10 +98,9 @@ namespace Samples
 
 	public class ShootEntity : Entity
 	{
-		public ShootEntity(Vector2 position, float rotation) : base(position, 20, 20)
+		public ShootEntity(Vector2 position, float rotation) : base(position)
 		{
 			Rotation = rotation;
-			OriginPoint = OriginEnum.Center;
 		}
 
 		public override void Initialize()
@@ -113,17 +111,17 @@ namespace Samples
 
 			var color = Color.FromNonPremultiplied(r.Next(256), r.Next(256), r.Next(256), 255);
 
-			AddChild(new PrototypeSprite(color));
+			AddChild(new PrototypeSprite(color, 20, 20));
 		}
 
 		public override void Update()
 		{
 			base.Update();
 
-			Right += 400 * FloatMath.Cos(RotationRadians) * Time.DeltaTime;
-			Top += 400 * FloatMath.Sin(RotationRadians) * Time.DeltaTime;
+			X += 400 * FloatMath.Cos(Rotation.ToRadians()) * Time.DeltaTime;
+			Y += 400 * FloatMath.Sin(Rotation.ToRadians()) * Time.DeltaTime;
 
-			if (Left > Scene.Camera.Right || Right < Scene.Camera.Left || Bottom < Scene.Camera.Top || Top > Scene.Camera.Bottom)
+			if (X > Scene.Camera.Right || X < Scene.Camera.Left || Y < Scene.Camera.Top || Y > Scene.Camera.Bottom)
 			{
 				Destroy();
 			}
@@ -136,18 +134,14 @@ namespace Samples
 
 		private int speed = baseSpeed;
 
-		public PlayerEntity() : base(0, 0, 100, 50)
-		{
-			OriginPoint = OriginEnum.Center;
-
-			Rotation = 0;
-		}
+		public PlayerEntity() : base(0, 0)
+		{ }
 
 		public override void Initialize()
 		{
 			base.Initialize();
 
-			AddChild(new PrototypeSprite(Color.Red));
+			AddChild(new PrototypeSprite(Color.Red, 100, 50));
 		}
 
 		public override void Update()
@@ -160,16 +154,16 @@ namespace Samples
 				speed = baseSpeed;
 
 			if (Prisma.Keyboard.IsKeyDown(Keys.D))
-				this.Left += speed * Time.DeltaTime;
+				this.X += speed * Time.DeltaTime;
 			else if (Prisma.Keyboard.IsKeyDown(Keys.A))
-				this.Left -= speed * Time.DeltaTime;
+				this.X -= speed * Time.DeltaTime;
 
 			if (Prisma.Keyboard.IsKeyDown(Keys.S))
-				this.Top += speed * Time.DeltaTime;
+				this.Y += speed * Time.DeltaTime;
 			else if (Prisma.Keyboard.IsKeyDown(Keys.W))
-				this.Top -= speed * Time.DeltaTime;
+				this.Y -= speed * Time.DeltaTime;
 
-			RotationRadians = Position.AngleBetween(Prisma.Mouse.Position);
+			Rotation = Position.AngleBetween(Prisma.Mouse.Position).ToDegrees();
 
 			if (Prisma.Mouse.IsButtonPressed(MouseButton.Left))
 				Scene.Groups["shoots"].AddEntity(new ShootEntity(Position, Rotation));
