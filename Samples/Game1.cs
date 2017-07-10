@@ -46,7 +46,7 @@ namespace Samples
 			green.Position = new Vector2(200);
 			green.AddChild(new PrototypeSprite(Color.Green, 100, 100));
 
-			camera = new DelayFollowCamera(player, 200);
+			camera = new DelayFollowCamera(player, 2);
 			camera.UseBounds = false;
 
 			Camera = camera;

@@ -38,7 +38,10 @@ namespace Prisma
 			pos.Y += PrismaGame.ScreenHeight / 2;
 
 			// Distance to our target
-			var dist = (Entity.Position - pos) / 100;
+			var dist = (Entity.Position - pos);
+			// If the distance is smaller than 5 pixels, don't move
+			dist.X = Math.Abs(dist.X) > 5 ? dist.X : 0;
+			dist.Y = Math.Abs(dist.Y) > 5 ? dist.Y : 0;
 
 			// The closer we are, the slower we move
 			Position.X += speed * Time.DeltaTime * dist.X;

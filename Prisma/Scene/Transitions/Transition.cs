@@ -8,63 +8,63 @@ using System.Threading.Tasks;
 
 namespace Prisma
 {
-    public class Transition : Scene
-    {
-        protected Scene previous, next;
+	public abstract class Transition : Scene
+	{
+		protected Scene previous, next;
 
-        protected RenderTarget2D prevRt, nextRt;
+		protected RenderTarget2D prevRt, nextRt;
 
-        public Action Modifier;
+		public Action Modifier;
 
-        public Transition(Scene previous, Scene next, Action modifier = null)
-        {
-            this.previous = previous;
-            this.next = next;
+		public Transition(Scene previous, Scene next, Action modifier = null)
+		{
+			this.previous = previous;
+			this.next = next;
 
-            Modifier = modifier;
+			Modifier = modifier;
 
-            if (!next.IsInitialized)
-                next.Initialize();
+			if (!next.IsInitialized)
+				next.Initialize();
 
-            prevRt = new RenderTarget2D(Graphics.Device, Graphics.Device.PresentationParameters.BackBufferWidth,
-                                             Graphics.Device.PresentationParameters.BackBufferHeight);
+			prevRt = new RenderTarget2D(Graphics.Device, Graphics.Device.PresentationParameters.BackBufferWidth,
+											 Graphics.Device.PresentationParameters.BackBufferHeight);
 
 
-            nextRt = new RenderTarget2D(Graphics.Device, Graphics.Device.PresentationParameters.BackBufferWidth,
-                                                     Graphics.Device.PresentationParameters.BackBufferHeight);
-        }
+			nextRt = new RenderTarget2D(Graphics.Device, Graphics.Device.PresentationParameters.BackBufferWidth,
+													 Graphics.Device.PresentationParameters.BackBufferHeight);
+		}
 
-        public override void Initialize()
-        {
-            base.Initialize();
+		public override void Initialize()
+		{
+			base.Initialize();
 
-            var rt = Graphics.Device.GetRenderTargets();
+			var rt = Graphics.Device.GetRenderTargets();
 
-            Graphics.Device.SetRenderTarget(prevRt);
+			Graphics.Device.SetRenderTarget(prevRt);
 
-            // Flush the backbuffer to our render target
-            PrismaGame.SpriteBatch.Begin();
-            previous.Draw();
-            PrismaGame.SpriteBatch.End();
+			// Flush the backbuffer to our render target
+			PrismaGame.SpriteBatch.Begin();
+			previous.Draw();
+			PrismaGame.SpriteBatch.End();
 
-            Modifier?.Invoke();
+			Modifier?.Invoke();
 
-            Graphics.Device.SetRenderTarget(nextRt);
+			Graphics.Device.SetRenderTarget(nextRt);
 
-            // Flush the backbuffer to our render target
-            PrismaGame.SpriteBatch.Begin();
-            next.Draw();
-            PrismaGame.SpriteBatch.End();
+			// Flush the backbuffer to our render target
+			PrismaGame.SpriteBatch.Begin();
+			next.Draw();
+			PrismaGame.SpriteBatch.End();
 
-            Graphics.Device.SetRenderTargets(rt);
-        }
+			Graphics.Device.SetRenderTargets(rt);
+		}
 
-        protected void End()
-        {
-            PrismaGame.Scene = next;
+		protected void End()
+		{
+			PrismaGame.Scene = next;
 
-            prevRt.Dispose();
-            nextRt.Dispose();
-        }
-    }
+			prevRt.Dispose();
+			nextRt.Dispose();
+		}
+	}
 }
