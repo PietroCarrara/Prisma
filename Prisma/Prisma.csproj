@@ -50,6 +50,7 @@
     <Compile Include="Camera\DelayFollowCamera.cs" />
     <Compile Include="Camera\FollowCamera.cs" />
     <Compile Include="Tiled\TiledMap.cs" />
+    <Compile Include="Tiled\TilesetExtentions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

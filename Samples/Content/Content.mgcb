@@ -10,6 +10,24 @@
 
 #-------------------------------- References --------------------------------#
 
+/reference:../../packages/MonoGame.Extended.Content.Pipeline.0.6.568/tools/MonoGame.Extended.Content.Pipeline.dll
 
 #---------------------------------- Content ---------------------------------#
+
+#begin sla.tmx
+/importer:TiledMapImporter
+/processor:TiledMapProcessor
+/build:sla.tmx
+
+#begin platformertiles.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:platformertiles.png
 

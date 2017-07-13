@@ -24,6 +24,8 @@ namespace Samples
 
 		private Entity player, green;
 
+		TiledMap map;
+
 		public MainScene(Scene parent = null)
 		{
 			if (parent != null)
@@ -36,6 +38,8 @@ namespace Samples
 
 		public override void Initialize()
 		{
+			base.Initialize();
+
 			Groups.Add(new EntityGroup("shoots"));
 
 			var gp = Groups.Add(new EntityGroup("squares"));
@@ -51,7 +55,9 @@ namespace Samples
 
 			Camera = camera;
 
-			base.Initialize();
+			var data = Content.Load<MonoGame.Extended.Tiled.TiledMap>("sla");
+			map = new TiledMap(data);
+			gp.AddEntity(map);
 		}
 
 		public override void Update()
