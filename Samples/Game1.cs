@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Prisma;
 using Prisma.Prototyping;
+using System;
+using MonoGame.Extended;
 
 namespace Samples
 {
@@ -92,7 +94,6 @@ namespace Samples
 					() =>
 					{
 						green.Position = player.Position;
-						ClearColor = Color.DodgerBlue;
 					});
 
 				PrismaGame.Scene = trans;
