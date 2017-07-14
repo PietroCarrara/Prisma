@@ -104,12 +104,11 @@ namespace Prisma
 		}
 
 		public static SpriteSortMode SpriteSortMode = SpriteSortMode.Deferred;
-		public static BlendState BlendState;
-		public static SamplerState SamplerState;
-		public static DepthStencilState DepthStencilState;
-		public static RasterizerState RasterizerState;
+		public static BlendState Blend;
+		public static SamplerState Sampler;
+		public static DepthStencilState DepthStencil;
+		public static RasterizerState Rasterizer;
 		public static Effect Effect;
-
 
 		public PrismaGame(Scene scene) : base()
 		{
@@ -164,7 +163,7 @@ namespace Prisma
 		{
 			base.Draw(gameTime);
 
-			spriteBatch.Begin(SpriteSortMode, BlendState, SamplerState, DepthStencilState, RasterizerState, Effect);
+			spriteBatch.Begin(SpriteSortMode, Blend, Sampler, DepthStencil, Rasterizer, Effect);
 
 			CurrentScene.Draw();
 

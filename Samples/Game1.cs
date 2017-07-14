@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Prisma;
 using Prisma.Prototyping;
@@ -13,6 +14,8 @@ namespace Samples
 			ScreenHeight = 720;
 
 			IsMouseVisible = true;
+
+			Sampler = SamplerState.PointClamp;
 		}
 	}
 
