@@ -21,6 +21,18 @@ namespace Prisma
 
 		public ContentManager Content;
 
+		public readonly Dictionary<string, float> Layers = new Dictionary<string, float>();
+		public void SetLayers(params string[] layers)
+		{
+			Layers.Clear();
+
+			// The value each layer must have
+			float each = 1f / layers.Length;
+
+			for (int i = 0; i < layers.Length; i++)
+				Layers.Add(layers[i], i * each);
+		}
+
 		public Scene()
 		{
 			Groups.Scene = this;

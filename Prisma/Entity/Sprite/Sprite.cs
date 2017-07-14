@@ -45,7 +45,8 @@ namespace Prisma
 						position: Position,
 						rotation: Rotation.ToRadians(),
 						scale: scale,
-						origin: middle / scale);
+						origin: middle / scale,
+						layerDepth: Parent.Depth);
 		}
 	}
 }

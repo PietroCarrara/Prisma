@@ -103,7 +103,7 @@ namespace Prisma
 			}
 		}
 
-		public static SpriteSortMode SpriteSortMode = SpriteSortMode.Deferred;
+		public static SpriteSortMode SpriteSortMode = SpriteSortMode.FrontToBack;
 		public static BlendState Blend;
 		public static SamplerState Sampler;
 		public static DepthStencilState DepthStencil;

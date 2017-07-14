@@ -139,6 +139,7 @@ namespace Prisma
 			flushDestroyQueue();
 		}
 
+		public float Depth { get; set; }
 		public virtual void Draw(Camera camera)
 		{
 			foreach (var child in Children)

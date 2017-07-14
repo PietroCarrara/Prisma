@@ -38,7 +38,8 @@ namespace Prisma
 
 							camera.Draw(data.Item1,
 										Position + new Vector2(x * map.TileWidth, y * map.TileHeight),
-										sourceRectangle: data.Item2);
+										sourceRectangle: data.Item2,
+										layerDepth: Parent.Depth);
 						}
 					}
 				}

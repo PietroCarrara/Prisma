@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace Prisma
 {
-    public interface IDrawable
-    {
-        void Draw(Camera camera);
-    }
+	public interface IDrawable
+	{
+		float Depth { get; set; }
+
+		void Draw(Camera camera);
+	}
 }

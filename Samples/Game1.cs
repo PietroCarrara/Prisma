@@ -15,6 +15,8 @@ namespace Samples
 			ScreenWidth = 1280;
 			ScreenHeight = 720;
 
+			IsFullScreen = true;
+
 			IsMouseVisible = true;
 
 			Sampler = SamplerState.PointClamp;
@@ -45,23 +47,28 @@ namespace Samples
 		{
 			base.Initialize();
 
+			this.SetLayers("background", "player", "green");
+
 			Groups.Add(new EntityGroup("shoots"));
 
 			var gp = Groups.Add(new EntityGroup("squares"));
 
 			player = gp.AddEntity(new PlayerEntity());
+			player.Depth = Layers["player"];
 
 			green = gp.AddEntity(new Entity());
 			green.Position = new Vector2(200);
 			green.AddChild(new PrototypeSprite(Color.Green, 100, 100));
+			green.Depth = Layers["green"];
 
-			camera = new DelayFollowCamera(player, 2);
+			camera = new DelayFollowCamera(player, 3f);
 			camera.UseBounds = false;
 
 			Camera = camera;
 
 			var data = Content.Load<MonoGame.Extended.Tiled.TiledMap>("sla");
 			map = new TiledMap(data);
+			map.Depth = Layers["background"];
 			gp.AddEntity(map);
 		}
 
