@@ -25,8 +25,6 @@ namespace Samples
 
 	public class MainScene : Scene
 	{
-		private Scene parent;
-
 		private DelayFollowCamera camera;
 
 		private Entity player, green;
@@ -35,11 +33,6 @@ namespace Samples
 
 		public MainScene(Scene parent = null)
 		{
-			if (parent != null)
-				this.parent = parent;
-			else
-				this.parent = this;
-
 			ClearColor = Color.Black;
 		}
 
@@ -61,15 +54,15 @@ namespace Samples
 			green.AddChild(new PrototypeSprite(Color.Green, 100, 100));
 			green.Depth = Layers["green"];
 
-			camera = new DelayFollowCamera(player, 3f);
-			camera.UseBounds = false;
-
-			Camera = camera;
-
 			var data = Content.Load<MonoGame.Extended.Tiled.TiledMap>("sla");
 			map = new TiledMap(data);
 			gp.AddEntity(map);
 			map.SetDepth(Layers);
+
+			camera = new DelayFollowCamera(map, 3f);
+			camera.UseBounds = false;
+
+			Camera = camera;
 		}
 
 		public override void Update()
@@ -78,11 +71,6 @@ namespace Samples
 
 			if (Prisma.Keyboard.IsKeyDown(Keys.Escape))
 				PrismaGame.End();
-
-			if (Prisma.Keyboard.IsKeyPressed(Keys.Space))
-				PrismaGame.Scene = parent;
-			else if (Prisma.Keyboard.IsKeyPressed(Keys.C))
-				PrismaGame.Scene = new MainScene(this);
 
 			if (Prisma.Keyboard.IsKeyPressed(Keys.P))
 				PrismaGame.IsPaused = !PrismaGame.IsPaused;

@@ -19,6 +19,18 @@
 /processor:TiledMapProcessor
 /build:sla.tmx
 
+#begin awesome-icon.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:awesome-icon.png
+
 #begin platformertiles.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -31,7 +43,7 @@
 /processorParam:TextureFormat=Color
 /build:platformertiles.png
 
-#begin awesome-icon.png
+#begin 93739.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -41,5 +53,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:awesome-icon.png
+/build:93739.png
 

@@ -25,8 +25,6 @@ namespace Prisma
 
 		public override void Draw(Camera camera)
 		{
-			Debug.WriteLine(Name + ": " + Depth);
-
 			base.Draw(camera);
 
 			for (int y = 0; y < layer.Height; y++)

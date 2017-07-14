@@ -26,7 +26,11 @@ namespace Prisma
 			int y = id / tileset.Columns,
 				x = id - y * tileset.Columns;
 
-			var rect = new Rectangle(x * tileset.TileWidth, y * tileset.TileHeight, tileset.TileWidth, tileset.TileHeight);
+			var rect = new Rectangle(x * tileset.TileWidth + tileset.Margin + tileset.Spacing * x,
+									 y * tileset.TileHeight + tileset.Margin + tileset.Spacing * y,
+
+									 tileset.TileWidth,
+									 tileset.TileHeight);
 
 			return new Tuple<Texture2D, Rectangle>(tileset.Texture, rect);
 		}
