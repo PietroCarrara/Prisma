@@ -12,16 +12,6 @@ namespace Prisma
 {
 	public class Entity : IUpdateable, IDrawable
 	{
-		public enum OriginEnum
-		{
-			TopLeft,
-			TopRight,
-			BottomLeft,
-			BottomRight,
-			Center,
-			None
-		}
-
 		internal bool IsInitialized = false;
 
 		public Entity Parent { get; private set; }
