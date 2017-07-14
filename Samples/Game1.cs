@@ -55,8 +55,7 @@ namespace Samples
 			green.Depth = Layers["green"];
 
 			var data = Content.Load<MonoGame.Extended.Tiled.TiledMap>("sla");
-			map = new TiledMap(data);
-			gp.AddEntity(map);
+			map = gp.AddEntity(new TiledMap(data));
 			map.SetDepth(Layers);
 
 			camera = new DelayFollowCamera(map, 3f);
