@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended.Tiled;
+using System.Diagnostics;
 namespace Prisma
 {
 	public class TiledLayer : Entity
@@ -14,8 +15,18 @@ namespace Prisma
 			layer = l;
 		}
 
+		public string Name
+		{
+			get
+			{
+				return layer.Name;
+			}
+		}
+
 		public override void Draw(Camera camera)
 		{
+			Debug.WriteLine(Name + ": " + Depth);
+
 			base.Draw(camera);
 
 			for (int y = 0; y < layer.Height; y++)
@@ -39,7 +50,7 @@ namespace Prisma
 							camera.Draw(data.Item1,
 										Position + new Vector2(x * map.TileWidth, y * map.TileHeight),
 										sourceRectangle: data.Item2,
-										layerDepth: Parent.Depth);
+										layerDepth: Depth);
 						}
 					}
 				}

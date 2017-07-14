@@ -47,7 +47,7 @@ namespace Samples
 		{
 			base.Initialize();
 
-			this.SetLayers("background", "player", "green");
+			this.SetLayers("BackGround", "player", "green", "Top");
 
 			Groups.Add(new EntityGroup("shoots"));
 
@@ -68,8 +68,8 @@ namespace Samples
 
 			var data = Content.Load<MonoGame.Extended.Tiled.TiledMap>("sla");
 			map = new TiledMap(data);
-			map.Depth = Layers["background"];
 			gp.AddEntity(map);
+			map.SetDepth(Layers);
 		}
 
 		public override void Update()
