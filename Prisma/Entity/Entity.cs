@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Media;
+using System.Diagnostics;
 
 namespace Prisma
 {
@@ -109,6 +110,37 @@ namespace Prisma
 			}
 
 			return child;
+		}
+
+		public List<T> GetChildren<T>()
+			where T : Entity
+		{
+			var list = new List<T>();
+
+			foreach (var child in Children)
+			{
+				var c = child as T;
+				if (c != null)
+					list.Add(c);
+			}
+
+			if (!list.Any())
+				throw new Exception();
+
+			return list;
+		}
+
+		public T GetChild<T>()
+			where T : Entity
+		{
+			foreach (var child in Children)
+			{
+				var c = child as T;
+				if (c != null)
+					return c;
+			}
+
+			return null;
 		}
 
 		public Entity(Vector2 pos)
