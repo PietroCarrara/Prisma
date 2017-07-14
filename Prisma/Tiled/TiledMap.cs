@@ -20,8 +20,10 @@ namespace Prisma
 		{
 			base.Initialize();
 
+			// Adding and centralizing the layers
 			foreach (var layer in map.TileLayers)
-				AddChild(new TiledLayer(map, layer));
+				AddChild(new TiledLayer(map, layer))
+					.RelativePosition = -new Vector2(map.WidthInPixels / 2f, map.HeightInPixels / 2f);
 		}
 
 		public void SetDepth(Dictionary<string, float> dic)
@@ -35,6 +37,13 @@ namespace Prisma
 		public override void Draw(Camera camera)
 		{
 			base.Draw(camera);
+		}
+
+		public override void OnDestroy()
+		{
+			base.OnDestroy();
+
+			map.Dispose();
 		}
 	}
 }
