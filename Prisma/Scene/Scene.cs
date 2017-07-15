@@ -9,10 +9,19 @@ using Microsoft.Xna.Framework.Content;
 
 namespace Prisma
 {
+	/// <summary>
+	/// A scene in your game.
+	/// </summary>
 	public class Scene : IUpdateable, IDisposable
 	{
+		/// <summary>
+		/// The <see cref="EntityGroup"/>s within this scene.
+		/// </summary>
 		public GroupList Groups { get; private set; } = new GroupList();
 
+		/// <summary>
+		/// This scene's camera.
+		/// </summary>
 		public Camera Camera = new Camera();
 
 		public Color ClearColor = Color.CornflowerBlue;
@@ -21,7 +30,15 @@ namespace Prisma
 
 		public ContentManager Content;
 
+		/// <summary>
+		/// The drawing layers of this scene.
+		/// </summary>
 		public readonly Dictionary<string, float> Layers = new Dictionary<string, float>();
+
+		/// <summary>
+		/// Automatically calculates the depth of each layer.
+		/// </summary>
+		/// <param name="layers">The names of the layers.</param>
 		public void SetLayers(params string[] layers)
 		{
 			Layers.Clear();

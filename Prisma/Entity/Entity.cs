@@ -10,6 +10,9 @@ using System.Diagnostics;
 
 namespace Prisma
 {
+	/// <summary>
+	/// Something in your game.
+	/// </summary>
 	public class Entity : IUpdateable, IDrawable
 	{
 		internal bool IsInitialized = false;
@@ -62,6 +65,9 @@ namespace Prisma
 			}
 		}
 
+		/// <summary>
+		/// The X axis of the position.
+		/// </summary>
 		public float X
 		{
 			get
@@ -74,6 +80,9 @@ namespace Prisma
 			}
 		}
 
+		/// <summary>
+		/// The Y axis of the position.
+		/// </summary>
 		public float Y
 		{
 			get
@@ -86,6 +95,11 @@ namespace Prisma
 			}
 		}
 
+		/// <summary>
+		/// Adds a child.
+		/// </summary>
+		/// <returns>The child.</returns>
+		/// <param name="child">Entity to be added.</param>
 		public Entity AddChild(Entity child)
 		{
 			child.Parent = this;
@@ -102,6 +116,11 @@ namespace Prisma
 			return child;
 		}
 
+		/// <summary>
+		/// Returns every child of given type
+		/// </summary>
+		/// <returns>The children.</returns>
+		/// <typeparam name="T">The wanted type.</typeparam>
 		public List<T> GetChildren<T>()
 			where T : Entity
 		{
@@ -120,6 +139,11 @@ namespace Prisma
 			return list;
 		}
 
+		/// <summary>
+		/// Gets the FIRST child of given type.
+		/// </summary>
+		/// <returns>The child, null if not found.</returns>
+		/// <typeparam name="T">The wanted type.</typeparam>
 		public T GetChild<T>()
 			where T : Entity
 		{
@@ -135,7 +159,6 @@ namespace Prisma
 
 		public Entity(Vector2 pos)
 		{
-
 			RelativePosition = pos;
 		}
 
@@ -153,6 +176,9 @@ namespace Prisma
 		public virtual void Initialize()
 		{ }
 
+		/// <summary>
+		/// Called once per frame.
+		/// </summary>
 		public virtual void Update()
 		{
 			foreach (var child in Children)
@@ -162,12 +188,19 @@ namespace Prisma
 		}
 
 		public float Depth { get; set; }
+		/// <summary>
+		/// Called every draw cicle
+		/// </summary>
+		/// <param name="camera">The camera to use while drawing.</param>
 		public virtual void Draw(Camera camera)
 		{
 			foreach (var child in Children)
 				child.Draw(camera);
 		}
 
+		/// <summary>
+		/// Destroy this entity and it's children.
+		/// </summary>
 		public void Destroy()
 		{
 			foreach (var child in Children)
@@ -190,6 +223,9 @@ namespace Prisma
 			}
 		}
 
+		/// <summary>
+		/// Action to be taken when destroied.
+		/// </summary>
 		public virtual void OnDestroy()
 		{ }
 	}

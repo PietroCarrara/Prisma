@@ -8,10 +8,16 @@ using System.Threading.Tasks;
 
 namespace Prisma
 {
+	/// <summary>
+	/// Object that draws on screen based on it's own position.
+	/// </summary>
 	public class Camera : IUpdateable
 	{
 		public Vector2 Position = Vector2.Zero;
 
+		/// <summary>
+		/// The right edge of the camera.
+		/// </summary>
 		public float Right
 		{
 			get
@@ -24,6 +30,9 @@ namespace Prisma
 			}
 		}
 
+		/// <summary>
+		/// The left edge of the camera.
+		/// </summary>
 		public float Left
 		{
 			get
@@ -36,6 +45,9 @@ namespace Prisma
 			}
 		}
 
+		/// <summary>
+		/// The top edge of the camera.
+		/// </summary>
 		public float Top
 		{
 			get
@@ -48,6 +60,9 @@ namespace Prisma
 			}
 		}
 
+		/// <summary>
+		/// The bottom edge of the camera.
+		/// </summary>
 		public float Bottom
 		{
 			get
@@ -60,6 +75,19 @@ namespace Prisma
 			}
 		}
 
+		/// <summary>
+		/// Draw something on the screen.
+		/// </summary>
+		/// <param name="texture">The texture to be drawn.</param>
+		/// <param name="position">Where to draw the texture.</param>
+		/// <param name="destinationRectangle">Squash your sprite to fit this rectangle.</param>
+		/// <param name="sourceRectangle">Cut a rectangle from the sprite and only draw that portion of it.</param>
+		/// <param name="origin">The origin of the texture.</param>
+		/// <param name="scale">Enlarge or shrink the texture.</param>
+		/// <param name="color">Which color to apply to the texture.</param>
+		/// <param name="rotation">Rotate the texture with the center on the origin.</param>
+		/// <param name="effects">Flip the texture.</param>
+		/// <param name="layerDepth">How much behind the things should this texture be?</param>
 		public virtual void Draw(
 			Texture2D texture,
 			Vector2? position = default(Vector2?),

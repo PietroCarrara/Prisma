@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Prisma
 {
+	/// <summary>
+	/// A group of entities
+	/// </summary>
 	public class EntityGroup : IEnumerable<Entity>
 	{
 		public string Name;
@@ -30,6 +33,11 @@ namespace Prisma
 			}
 		}
 
+		/// <summary>
+		/// Adds a entity to the group.
+		/// </summary>
+		/// <returns>The entity.</returns>
+		/// <param name="e">The entity.</param>
 		public T AddEntity<T>(T e)
 			where T : Entity
 		{
@@ -52,6 +60,10 @@ namespace Prisma
 			entities.Remove(e);
 		}
 
+		/// <summary>
+		/// Gets the <see cref="T:Prisma.Entity"/> at the specified index.
+		/// </summary>
+		/// <param name="index">Index.</param>
 		public Entity this[int index]
 		{
 			get

@@ -5,6 +5,7 @@ using Prisma;
 using Prisma.Prototyping;
 using System;
 using MonoGame.Extended;
+using System.Security.Cryptography;
 
 namespace Samples
 {
@@ -14,8 +15,6 @@ namespace Samples
 		{
 			ScreenWidth = 1280;
 			ScreenHeight = 720;
-
-			IsFullScreen = true;
 
 			IsMouseVisible = true;
 
@@ -62,6 +61,8 @@ namespace Samples
 			camera.UseBounds = false;
 
 			Camera = camera;
+
+			//Camera.Right = 0;
 		}
 
 		public override void Update()
@@ -169,7 +170,7 @@ namespace Samples
 
 			Rotation = Position.AngleBetween(Prisma.Mouse.Position).ToDegrees();
 
-			if (Prisma.Mouse.IsButtonPressed(MouseButton.Left))
+			if (Prisma.Mouse.IsButtonDown(MouseButton.Left))
 				Scene.Groups["shoots"].AddEntity(new ShootEntity(Position, Rotation));
 		}
 	}

@@ -8,6 +8,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Prisma.Prototyping
 {
+	/// <summary>
+	/// A sprite that is just a solid color. Great for prototyping.
+	/// </summary>
 	public class PrototypeSprite : Sprite
 	{
 		private Color color;

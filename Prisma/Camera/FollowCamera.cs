@@ -8,12 +8,24 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Prisma
 {
+	/// <summary>
+	/// A camera that follows some entity
+	/// </summary>
 	public class FollowCamera : Camera
 	{
+		/// <summary>
+		/// The entity being followed
+		/// </summary>
 		public Entity Entity;
 
+		/// <summary>
+		/// Should the camera respect some boundaries?
+		/// </summary>
 		public bool UseBounds;
 
+		/// <summary>
+		/// The boundaries.
+		/// </summary>
 		public float MinHeight, MinWidth, MaxHeight, MaxWidth;
 
 		public FollowCamera(Entity e)

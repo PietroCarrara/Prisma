@@ -7,6 +7,9 @@ using System.Collections.Generic;
 
 namespace Prisma
 {
+	/// <summary>
+	/// A tiled map.
+	/// </summary>
 	public class TiledMap : Entity
 	{
 		readonly MonoGame.Extended.Tiled.TiledMap map;
@@ -26,6 +29,9 @@ namespace Prisma
 					.RelativePosition = -new Vector2(map.WidthInPixels / 2f, map.HeightInPixels / 2f);
 		}
 
+		/// <summary>
+		/// Tries to set the tiled layers on the specified draw layers.
+		/// </summary>
 		public void SetDepth(Dictionary<string, float> dic)
 		{
 			var layers = GetChildren<TiledLayer>();

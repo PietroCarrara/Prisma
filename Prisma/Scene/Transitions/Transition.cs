@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Prisma
 {
+	/// <summary>
+	/// A class for helping with scene switching.
+	/// </summary>
 	public abstract class Transition : Scene
 	{
 		protected Scene previous, next;
@@ -16,6 +19,12 @@ namespace Prisma
 
 		public Action Modifier;
 
+		/// <summary>
+		/// A class for helping with scene switching.
+		/// </summary>
+		/// <param name="previous">The current scene.</param>
+		/// <param name="next">The scene to switch to.</param>
+		/// <param name="modifier">A modifier to apply to the next scene. Mostly using when swithcing to the current scene.</param>
 		public Transition(Scene previous, Scene next, Action modifier = null)
 		{
 			this.previous = previous;
@@ -59,6 +68,9 @@ namespace Prisma
 			Graphics.Device.SetRenderTargets(rt);
 		}
 
+		/// <summary>
+		/// Call to end the transition.
+		/// </summary>
 		protected void End()
 		{
 			PrismaGame.Scene = next;

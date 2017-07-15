@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Prisma
 {
+	/// <summary>
+	/// A collection of groups.
+	/// </summary>
 	public class GroupList : IEnumerable<EntityGroup>
 	{
 		private List<EntityGroup> list;
@@ -37,6 +40,10 @@ namespace Prisma
 			return list.GetEnumerator();
 		}
 
+		/// <summary>
+		/// Gets the <see cref="T:Prisma.EntityGroup"/> with the specified name.
+		/// </summary>
+		/// <param name="name">The name.</param>
 		public EntityGroup this[string name]
 		{
 			get

@@ -8,14 +8,26 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Prisma
 {
+	/// <summary>
+	/// A camera that smoothly follows a entity. 
+	/// </summary>
 	public class DelayFollowCamera : Camera
 	{
 		public Entity Entity;
 
+		/// <summary>
+		/// The camera's speed.
+		/// </summary>
 		private float speed;
 
+		/// <summary>
+		/// Should the camera respect some boundaries?
+		/// </summary>
 		public bool UseBounds;
 
+		/// <summary>
+		/// The boundaries.
+		/// </summary>
 		public float MinHeight, MinWidth, MaxHeight, MaxWidth;
 
 		public DelayFollowCamera(Entity e, float speed)
@@ -32,6 +44,9 @@ namespace Prisma
 
 		public override void Update()
 		{
+			if (Entity == null)
+				return;
+
 			// Centralizes the camera
 			var pos = Position;
 			pos.X += PrismaGame.ScreenWidth / 2;

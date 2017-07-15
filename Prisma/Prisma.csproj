@@ -35,7 +35,7 @@
     <Compile Include="Scene\Transitions\Transition.cs" />
     <Compile Include="Prototyping\PrototypeSprite.cs" />
     <Compile Include="Math\FloatExtensions.cs" />
-    <Compile Include="Math\Math.cs" />
+    <Compile Include="Math\FloatMath.cs" />
     <Compile Include="Math\Vector2Extensions.cs" />
     <Compile Include="Interfaces\IDrawable.cs" />
     <Compile Include="Interfaces\IUpdateable.cs" />

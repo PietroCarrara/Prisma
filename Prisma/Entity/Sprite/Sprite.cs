@@ -4,8 +4,14 @@ using Microsoft.Xna.Framework;
 
 namespace Prisma
 {
+	/// <summary>
+	/// A entity that contains a texture.
+	/// </summary>
 	public class Sprite : Entity
 	{
+		/// <summary>
+		/// The texture.
+		/// </summary>
 		protected Texture2D Texture;
 
 		private Vector2 scale, middle;
