@@ -12,11 +12,6 @@ namespace Prisma
 			Radius = raduis;
 		}
 
-		public override void Initialize()
-		{
-			RelativePosition -= new Vector2(Radius / 2);
-		}
-
 		public override bool CollidesWith(Entity e)
 		{
 			return this.Position.DistanceTo(e.Position) <= this.Radius;

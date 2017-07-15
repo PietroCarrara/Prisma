@@ -55,6 +55,7 @@
     <Compile Include="Collisions\Shape.cs" />
     <Compile Include="Collisions\Circle.cs" />
     <Compile Include="Collisions\Rectangle.cs" />
+    <Compile Include="Prototyping\CirclePrototypeSprite.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
