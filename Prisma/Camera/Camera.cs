@@ -91,8 +91,8 @@ namespace Prisma
 		public virtual void Draw(
 			Texture2D texture,
 			Vector2? position = default(Vector2?),
-			Rectangle? destinationRectangle = default(Rectangle?),
-			Rectangle? sourceRectangle = default(Rectangle?),
+			Microsoft.Xna.Framework.Rectangle? destinationRectangle = default(Microsoft.Xna.Framework.Rectangle?),
+			Microsoft.Xna.Framework.Rectangle? sourceRectangle = default(Microsoft.Xna.Framework.Rectangle?),
 			Vector2? origin = default(Vector2?),
 			Vector2? scale = default(Vector2?),
 			Color? color = default(Color?),

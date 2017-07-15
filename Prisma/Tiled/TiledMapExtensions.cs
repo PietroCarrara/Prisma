@@ -7,7 +7,7 @@ namespace Prisma
 {
 	public static class TiledMapExtensions
 	{
-		public static Tuple<Texture2D, Rectangle> GetTile(this MonoGame.Extended.Tiled.TiledMap map, int id)
+		public static Tuple<Texture2D, Microsoft.Xna.Framework.Rectangle> GetTile(this MonoGame.Extended.Tiled.TiledMap map, int id)
 		{
 			int index = 0;
 			TiledMapTileset tileset = map.Tilesets[index];
@@ -26,13 +26,13 @@ namespace Prisma
 			int y = id / tileset.Columns,
 				x = id - y * tileset.Columns;
 
-			var rect = new Rectangle(x * tileset.TileWidth + tileset.Margin + tileset.Spacing * x,
+			var rect = new Microsoft.Xna.Framework.Rectangle(x * tileset.TileWidth + tileset.Margin + tileset.Spacing * x,
 									 y * tileset.TileHeight + tileset.Margin + tileset.Spacing * y,
 
 									 tileset.TileWidth,
 									 tileset.TileHeight);
 
-			return new Tuple<Texture2D, Rectangle>(tileset.Texture, rect);
+			return new Tuple<Texture2D, Microsoft.Xna.Framework.Rectangle>(tileset.Texture, rect);
 		}
 	}
 }
