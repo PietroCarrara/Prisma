@@ -16,31 +16,44 @@ namespace Prisma
 
 		private Vector2 scale, middle;
 
-		public int Width, Height;
+		private int width, height;
+		public int Width
+		{
+			get
+			{
+				return width;
+			}
+			set
+			{
+				width = value;
+				scale.X = ((float)this.width) / Texture.Width;
+				middle.X = width / 2f;
+			}
+		}
+		public int Height
+		{
+			get
+			{
+				return height;
+			}
+			set
+			{
+				height = value;
+				scale.Y = ((float)this.height) / Texture.Height;
+				middle.Y = height / 2f;
+			}
+		}
 
 		public Sprite(Texture2D texture, int width, int height)
 		{
 			this.Texture = texture;
 
-			Width = width;
-			Height = height;
+			this.width = width;
+			this.height = height;
 
-			middle = new Vector2(Width / 2f, Height / 2f);
-		}
+			middle = new Vector2(this.width / 2f, this.height / 2f);
 
-		public override void Initialize()
-		{
-			base.Initialize();
-
-			scale = new Vector2(((float)Width) / Texture.Width, ((float)Height) / Texture.Height);
-		}
-
-		public override void Update()
-		{
-			base.Update();
-
-			scale.X = ((float)Width) / Texture.Width;
-			scale.Y = ((float)Height) / Texture.Height;
+			scale = new Vector2(((float)this.width) / Texture.Width, ((float)this.height) / Texture.Height);
 		}
 
 		public override void Draw(Camera camera)

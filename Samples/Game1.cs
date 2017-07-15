@@ -50,7 +50,8 @@ namespace Samples
 
 			green = gp.AddEntity(new Entity());
 			green.Position = new Vector2(200);
-			green.AddChild(new PrototypeSprite(Color.Green, 100, 100));
+			green.AddChild(new PrototypeSprite(Color.Green, 100, 100))
+				 .Width = 150;
 			green.Depth = Layers["green"];
 
 			var data = Content.Load<MonoGame.Extended.Tiled.TiledMap>("sla");
@@ -113,6 +114,8 @@ namespace Samples
 			base.Initialize();
 
 			var r = new System.Random();
+
+			Depth = Scene.Layers["player"];
 
 			var color = Color.FromNonPremultiplied(r.Next(256), r.Next(256), r.Next(256), 255);
 
