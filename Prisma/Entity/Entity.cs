@@ -100,7 +100,8 @@ namespace Prisma
 		/// </summary>
 		/// <returns>The child.</returns>
 		/// <param name="child">Entity to be added.</param>
-		public Entity AddChild(Entity child)
+		public T AddChild<T>(T child)
+			where T : Entity
 		{
 			child.Parent = this;
 			child.Group = Group;
