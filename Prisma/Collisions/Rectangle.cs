@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Xna.Framework.Graphics.PackedVector;
+using Microsoft.Xna.Framework;
 
 namespace Prisma
 {
@@ -11,6 +12,8 @@ namespace Prisma
 		{
 			Width = width;
 			Height = height;
+
+			RelativePosition = -new Vector2(Width / 2, Height / 2);
 		}
 
 		public override bool CollidesWith(Entity e)
@@ -26,11 +29,11 @@ namespace Prisma
 
 		public override bool CollidesWith(Rectangle r)
 		{
-			return rangeOverlap(this.Position.X, this.Position.X + Width,
-								r.Position.X, r.Position.X + r.Width)
+			return rangeOverlap(this.X, this.X + Width,
+								r.X, r.X + r.Width)
 					&&
-					rangeOverlap(this.Position.Y, this.Position.Y + Height,
-								 r.Position.Y, r.Position.Y + r.Height);
+					rangeOverlap(this.Y, this.Y + Height,
+								 r.Y, r.Y + r.Height);
 		}
 
 		bool inRange(float check, float val1, float val2)

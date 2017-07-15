@@ -27,7 +27,7 @@ namespace Samples
 	{
 		Entity e1, e2;
 
-		Shape c1, c2;
+		Prisma.Rectangle c1, c2;
 
 		public override void Initialize()
 		{
@@ -36,19 +36,19 @@ namespace Samples
 			var gp = Groups.Add(new EntityGroup("main"));
 
 			e1 = gp.AddEntity(new Entity());
-			c1 = e1.AddChild(new Circle(10));
-			e1.AddChild(new CirclePrototypeSprite(Color.Green, 10));
+			c1 = e1.AddChild(new Prisma.Rectangle(100, 100));
+			e1.AddChild(new PrototypeSprite(Color.Green, 100, 100));
 
 			e2 = gp.AddEntity(new Entity());
-			c2 = e2.AddChild(new Circle(50));
-			e2.AddChild(new CirclePrototypeSprite(Color.Blue, 50));
+			c2 = e2.AddChild(new Prisma.Rectangle(300, 300));
+			e2.AddChild(new PrototypeSprite(Color.Blue, 300, 300));
 		}
 
 		public override void Update()
 		{
 			base.Update();
 
-			if (c1.CollidesWith(c2 as Circle))
+			if (c1.CollidesWith(c2))
 				ClearColor = Color.Red;
 			else
 				ClearColor = Color.Black;
