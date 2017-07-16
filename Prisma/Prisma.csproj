@@ -52,6 +52,10 @@
     <Compile Include="Tiled\TiledMap.cs" />
     <Compile Include="Tiled\TiledMapExtensions.cs" />
     <Compile Include="Tiled\TiledLayer.cs" />
+    <Compile Include="Collisions\Shape.cs" />
+    <Compile Include="Collisions\Circle.cs" />
+    <Compile Include="Collisions\Rectangle.cs" />
+    <Compile Include="Prototyping\CirclePrototypeSprite.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -84,6 +88,7 @@
     <Folder Include="Entity\" />
     <Folder Include="Camera\" />
     <Folder Include="Tiled\" />
+    <Folder Include="Collisions\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>

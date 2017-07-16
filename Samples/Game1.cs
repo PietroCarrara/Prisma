@@ -6,12 +6,13 @@ using Prisma.Prototyping;
 using System;
 using MonoGame.Extended;
 using System.Security.Cryptography;
+using System.Diagnostics;
 
 namespace Samples
 {
 	public class Game1 : PrismaGame
 	{
-		public Game1() : base(new MainScene())
+		public Game1() : base(new TestScene())
 		{
 			ScreenWidth = 1280;
 			ScreenHeight = 720;
@@ -19,6 +20,46 @@ namespace Samples
 			IsMouseVisible = true;
 
 			Sampler = SamplerState.PointClamp;
+		}
+	}
+
+	class TestScene : Scene
+	{
+		Entity e1, e2;
+
+		Prisma.Rectangle c1, c2;
+
+		public override void Initialize()
+		{
+			base.Initialize();
+
+			var gp = Groups.Add(new EntityGroup("main"));
+
+			e1 = gp.AddEntity(new Entity());
+			c1 = e1.AddChild(new Prisma.Rectangle(100, 100));
+			e1.AddChild(new PrototypeSprite(Color.Green, 100, 100));
+
+			e2 = gp.AddEntity(new Entity());
+			c2 = e2.AddChild(new Prisma.Rectangle(300, 300));
+			e2.AddChild(new PrototypeSprite(Color.Blue, 300, 300));
+		}
+
+		public override void Update()
+		{
+			base.Update();
+
+			if (c1.CollidesWith(c2))
+				ClearColor = Color.Red;
+			else
+				ClearColor = Color.Black;
+
+			e1.Position = Prisma.Mouse.Position;
+
+			if (Prisma.Mouse.IsButtonDown(MouseButton.Right))
+				e2.Position = Prisma.Mouse.Position;
+
+			if (Prisma.Keyboard.IsKeyDown(Keys.Escape))
+				PrismaGame.End();
 		}
 	}
 
