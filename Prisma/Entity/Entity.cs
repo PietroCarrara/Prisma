@@ -24,6 +24,9 @@ namespace Prisma
 		public EntityGroup Group { get; internal set; }
 
 		private float rotation = 0;
+		/// <summary>
+		/// Rotation in degrees.
+		/// </summary>
 		public float Rotation
 		{
 			get
@@ -36,7 +39,7 @@ namespace Prisma
 			set
 			{
 				if (Parent != null)
-					Rotation = value - Parent.Rotation;
+					rotation = value - Parent.Rotation;
 				else
 					rotation = value;
 			}
