@@ -62,7 +62,7 @@ namespace Prisma
 			set
 			{
 				if (Parent != null)
-					RelativePosition = Parent.Position - value;
+					RelativePosition = value - Parent.Position;
 				else
 					RelativePosition = value;
 			}
