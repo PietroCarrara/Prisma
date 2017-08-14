@@ -32,12 +32,12 @@ namespace Prisma
 		/// <summary>
 		/// Tries to set the tiled layers on the specified draw layers.
 		/// </summary>
-		public void SetDepth(Dictionary<string, float> dic)
+		public void SetDepth(Dictionary<string, Counter> dic)
 		{
 			var layers = GetChildren<TiledLayer>();
 
 			foreach (var layer in layers)
-				layer.Depth = dic[layer.Name];
+				layer.Depth = dic[layer.Name].Next();
 		}
 
 		public override void Draw(Camera camera)

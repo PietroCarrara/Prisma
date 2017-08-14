@@ -33,7 +33,7 @@ namespace Prisma
 		/// <summary>
 		/// The drawing layers of this scene.
 		/// </summary>
-		public readonly Dictionary<string, float> Layers = new Dictionary<string, float>();
+		public readonly Dictionary<string, Counter> Layers = new Dictionary<string, Counter>();
 
 		/// <summary>
 		/// Automatically calculates the depth of each layer.
@@ -41,13 +41,15 @@ namespace Prisma
 		/// <param name="layers">The names of the layers.</param>
 		public void SetLayers(params string[] layers)
 		{
+			const float step = 0.00001f;
+
 			Layers.Clear();
 
 			// The value each layer must have
 			float each = 1f / layers.Length;
 
 			for (int i = 0; i < layers.Length; i++)
-				Layers.Add(layers[i], i * each);
+				Layers.Add(layers[i], new Counter(i * each, step));
 		}
 
 		public Scene()
