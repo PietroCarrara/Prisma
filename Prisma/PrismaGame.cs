@@ -163,9 +163,13 @@ namespace Prisma
 		{
 			base.Draw(gameTime);
 
-			spriteBatch.Begin(SpriteSortMode, Blend, Sampler, DepthStencil, Rasterizer, Effect);
+			spriteBatch.Begin(SpriteSortMode, Blend, Sampler, DepthStencil, Rasterizer, Effect );
+
+			Graphics.Device.SetRenderTarget(CurrentScene.Camera.RenderTarget);
 
 			CurrentScene.Draw();
+
+			Graphics.Device.SetRenderTarget(null);
 
 			spriteBatch.End();
 		}

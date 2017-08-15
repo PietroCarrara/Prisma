@@ -30,7 +30,8 @@ namespace Prisma
 		/// </summary>
 		public float MinHeight, MinWidth, MaxHeight, MaxWidth;
 
-		public DelayFollowCamera(Entity e, float speed)
+		public DelayFollowCamera(int width, int height, Entity e, float speed) :
+		base(width, height)
 		{
 			this.Entity = e;
 

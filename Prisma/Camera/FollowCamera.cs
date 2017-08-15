@@ -28,7 +28,8 @@ namespace Prisma
 		/// </summary>
 		public float MinHeight, MinWidth, MaxHeight, MaxWidth;
 
-		public FollowCamera(Entity e)
+		public FollowCamera(int width, int height, Entity e) :
+		base(width, height)
 		{
 			this.Entity = e;
 		}

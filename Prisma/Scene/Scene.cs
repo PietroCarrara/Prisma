@@ -22,7 +22,7 @@ namespace Prisma
 		/// <summary>
 		/// This scene's camera.
 		/// </summary>
-		public Camera Camera = new Camera();
+		public Camera Camera;
 
 		public Color ClearColor = Color.CornflowerBlue;
 
@@ -60,6 +60,8 @@ namespace Prisma
 		public virtual void Initialize()
 		{
 			IsInitialized = true;
+
+			Camera = new Camera(1280, 720);
 
 			Content = new ContentManager(PrismaGame.ContentManager.ServiceProvider, PrismaGame.ContentManager.RootDirectory);
 		}

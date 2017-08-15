@@ -15,6 +15,25 @@ namespace Prisma
 	{
 		public Vector2 Position = Vector2.Zero;
 
+		public int Height, Width;
+
+		private RenderTarget2D renderTarget;
+		public RenderTarget2D RenderTarget
+		{
+			get
+			{
+				return renderTarget;
+			}
+		}
+
+		public Camera(int width, int height)
+		{
+			Width = width;
+			Height = height;
+
+			renderTarget = new RenderTarget2D(Graphics.Device, width, height);
+		}
+
 		/// <summary>
 		/// The right edge of the camera.
 		/// </summary>
